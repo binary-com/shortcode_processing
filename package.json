@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "chai": "^3.5.0",
+    "lodash": "^4.17.4",
+    "mocha": "^3.2.0",
+    "moment": "^2.18.1",
+    "webpack": "^2.3.3"
+  },
+  "name": "shortcode_processing",
+  "description": "Convert Binary.com's shorcode to longcode",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/binary-com/shortcode_processing.git"
+  },
+  "keywords": [
+    "shortcode-to-longcode"
+  ],
+  "author": "Apoorv Joshi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/binary-com/shortcode_processing/issues"
+  },
+  "homepage": "https://github.com/binary-com/shortcode_processing#readme"
+}
