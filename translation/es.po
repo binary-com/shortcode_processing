@@ -1,0 +1,7 @@
+# /src/get_bet_parameters.js 4:11
+msgid "abcd"
+msgstr ""
+
+# /src/translate.js 1:43
+#~ msgid "zzzz"
+#~ msgstr "ababab"
