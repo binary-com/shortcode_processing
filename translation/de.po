@@ -1,3 +1,0 @@
-# /src/get_bet_parameters.js 4:11
-msgid "abcd"
-msgstr ""

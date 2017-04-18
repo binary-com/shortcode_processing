@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 58);
+/******/ 	return __webpack_require__(__webpack_require__.s = 61);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -168,6 +168,13 @@ module.exports = {
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(16);
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // This is (almost) directly from Node.js utils
@@ -508,14 +515,14 @@ function objectToString(o) {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(55);
+module.exports = __webpack_require__(56);
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 /*!
@@ -634,13 +641,6 @@ AssertionError.prototype.toJSON = function (stack) {
 
   return props;
 };
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(16);
 
 
 /***/ }),
@@ -824,7 +824,7 @@ function _getPathValue (parsed, obj, index) {
  * MIT Licensed
  */
 
-var type = __webpack_require__(3);
+var type = __webpack_require__(4);
 
 /**
  * ### .hasProperty(object, name)
@@ -898,7 +898,7 @@ module.exports = function hasProperty(name, obj) {
  * Module dependancies
  */
 
-var inspect = __webpack_require__(2);
+var inspect = __webpack_require__(3);
 var config = __webpack_require__(1);
 
 /**
@@ -993,11 +993,95 @@ module.exports = function (assertion, object, includeAll) {
 
 /***/ }),
 /* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(60);
+/**
+ * Created by Apoorv Joshi on 17/04/2017
+ * @param {*} shortcode 
+ * @param {*} currency 
+ * @param {*} is_sold 
+ */
+
+
+
+
+const get_bet_parameters = (shortcode, currency, is_sold, active_symbols) => {
+    let parameters = {
+        bet_type: 'Invalid',
+        underlying: 'config',
+        currency: currency
+    };
+    if(!active_symbols)
+        throw 'Active Symbols list not present';
+    //Contracts with barrier
+    let match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)_S?(-?\d+)P?_S?(-?\d+)P?/);
+    if (!match) { // Contracts without barriers. Eg: 'Asians'. (Not being racist, it is actually a contract type. Believe me!)
+        match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)/);
+        if (match) {
+            let underlying = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* find */])(active_symbols, underlying => underlying.symbol === match[2]);
+            parameters = {
+                barrier_count: 0,
+                shortcode: match[0],
+                bet_type: match[1],
+                underlying: underlying.market_display_name,
+                underlying_symbol: match[2],
+                amount_type: 'payout',
+                amount: +match[3],
+                date_start: +match[4],
+                tick_expiry: 1,
+                tick_count: +match[5].toUpperCase().replace('T', '')
+            }
+        }
+    } else { // Normal contracts with at least 1 barrier.
+        let underlying = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* find */])(active_symbols, underlying => underlying.symbol === match[2]);
+        parameters = {
+            shortcode: match[0],
+            bet_type: match[1],
+            underlying_symbol: match[2],
+            underlying: underlying.market_display_name,
+            amount_type: 'payout',
+            amount: +match[3],
+            date_start: +match[4].toUpperCase().replace('F', '')
+        }
+        if (match[4].toUpperCase().indexOf('F') !== -1) parameters.starts_as_forward_starting = 1;
+        if (match[5].toUpperCase().indexOf('T') !== -1) { // Tick trade
+            parameters.tick_expiry = 1;
+            parameters.tick_count = +match[5].toUpperCase().replace('T', '');
+        } else {
+            if (match[5].toUpperCase().indexOf('F') !== -1) parameter.fixed_expiry = 1;
+            parameters.date_expiry = +match[5].toUpperCase().replace('F', '')
+        }
+        if (+match[6] === 0) { // No barrier
+            parameters.barrier_count = 0;
+        } else if (+match[7] === 0) { //Only one barrier available
+            parameters.barrier = +match[6] * underlying.pip;
+            parameters.barrier_count = 1;
+        } else { // Two barriers available
+            parameters.high_barrier = +match[6] * underlying.pip;
+            parameters.low_barrier = +match[7] * underlying.pip;
+            parameters.barrier_count = 2;
+        }
+    }
+
+    parameters.currency = currency;
+    parameters.is_sold = is_sold;
+
+    return parameters;
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = get_bet_parameters;
+
+
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./get_bet_parameters.test.js": 59,
-	"./translate.test.js": 60
+	"./get_bet_parameters.test.js": 62,
+	"./shortcode_processing.test.js": 63,
+	"./translation.test.js": 64
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -1013,107 +1097,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 12;
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["shortcode_processing"] = factory();
-	else
-		root["shortcode_processing"] = factory();
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
-/******/
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var get_bet_parameters = exports.get_bet_parameters = function get_bet_parameters(shortcode) {
-    return translate('abcd');
-};
-
-/***/ })
-/******/ ]);
-});
+webpackContext.id = 13;
 
 /***/ }),
 /* 14 */
@@ -3031,7 +3015,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(56)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(57)))
 
 /***/ }),
 /* 16 */
@@ -3056,7 +3040,7 @@ exports.version = '3.5.0';
  * Assertion Error
  */
 
-exports.AssertionError = __webpack_require__(4);
+exports.AssertionError = __webpack_require__(5);
 
 /*!
  * Utils for plugins (not exported)
@@ -7279,9 +7263,9 @@ module.exports = function (ctx, name, getter) {
  * @api public
  */
 
-var AssertionError = __webpack_require__(4);
+var AssertionError = __webpack_require__(5);
 var flag = __webpack_require__(0);
-var type = __webpack_require__(3);
+var type = __webpack_require__(4);
 
 module.exports = function (obj, types) {
   var obj = flag(obj, 'object');
@@ -7351,7 +7335,7 @@ module.exports = function getEnumerableProperties(object) {
 
 var flag = __webpack_require__(0)
   , getActual = __webpack_require__(6)
-  , inspect = __webpack_require__(2)
+  , inspect = __webpack_require__(3)
   , objDisplay = __webpack_require__(10);
 
 /**
@@ -7509,7 +7493,7 @@ exports.test = __webpack_require__(34);
  * type utility
  */
 
-exports.type = __webpack_require__(3);
+exports.type = __webpack_require__(4);
 
 /*!
  * expectTypes utility
@@ -7532,7 +7516,7 @@ exports.getActual = __webpack_require__(6);
  * Inspect util
  */
 
-exports.inspect = __webpack_require__(2);
+exports.inspect = __webpack_require__(3);
 
 /*!
  * Object Display util
@@ -8362,119 +8346,91 @@ module.exports = Array.isArray || function (arr) {
 /* 41 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 42 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 43 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 44 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 45 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 46 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 47 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 48 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 49 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 50 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 51 */
 /***/ (function(module, exports) {
 
 module.exports = {
-	"abcd": [
+	"Enter a comma separated list of user names.": [
 		null,
+		"Eine kommagetrennte Liste von Benutzernamen."
+	],
+	"_n Second": [
+		"_n Seconds",
+		"_n Sekunde",
+		"_n Sekunden"
+	],
+	"Hello": [
+		null,
+		""
+	],
+	"Hello _n!": [
+		null,
+		""
+	],
+	"How are you _name?": [
+		null,
+		"Wie geht es dir _name?"
+	],
+	"_n Hour": [
+		"_n Hours",
+		"",
 		""
 	]
 };
@@ -8483,37 +8439,28 @@ module.exports = {
 /* 52 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 53 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 54 */
 /***/ (function(module, exports) {
 
-module.exports = {
-	"abcd": [
-		null,
-		""
-	]
-};
+module.exports = {};
 
 /***/ }),
 /* 55 */
+/***/ (function(module, exports) {
+
+module.exports = {};
+
+/***/ }),
+/* 56 */
 /***/ (function(module, exports) {
 
 /*!
@@ -8653,7 +8600,7 @@ Library.prototype.test = function(obj, type) {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports) {
 
 var g;
@@ -8680,7 +8627,41 @@ module.exports = g;
 
 
 /***/ }),
-/* 57 */
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__get_bet_parameters_js__ = __webpack_require__(12);
+
+
+class ShortcodeProcessing {
+    constructor(active_symbols, lang) {
+        this.active_symbols = active_symbols;
+        this.lang = lang || 'en'; // EN is fallback language.
+    }
+
+    getActiveSymbols() {
+        return this.active_symbols;
+    }
+
+    getCurrentLanguage() {
+        return this.lang;
+    }
+
+    setCurrentLanguage(lang) {
+        this.lang = lang;
+    }
+
+    getBetParameters(shortcode) {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_bet_parameters_js__["a" /* get_bet_parameters */])(shortcode);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = ShortcodeProcessing;
+
+
+
+/***/ }),
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8704,14 +8685,16 @@ module.exports = g;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_json_loader_po_loader_translation_pt_po___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_json_loader_po_loader_translation_pt_po__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_json_loader_po_loader_translation_ru_po__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_json_loader_po_loader_translation_ru_po___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_json_loader_po_loader_translation_ru_po__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_json_loader_po_loader_translation_th_po__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_json_loader_po_loader_translation_th_po__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_json_loader_po_loader_translation_th_po___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_json_loader_po_loader_translation_th_po__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_json_loader_po_loader_translation_vi_po__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_json_loader_po_loader_translation_vi_po__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_json_loader_po_loader_translation_vi_po___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_json_loader_po_loader_translation_vi_po__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_json_loader_po_loader_translation_zh_cn_po__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_json_loader_po_loader_translation_zh_cn_po__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_json_loader_po_loader_translation_zh_cn_po___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_json_loader_po_loader_translation_zh_cn_po__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_json_loader_po_loader_translation_zh_tw_po__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_json_loader_po_loader_translation_zh_tw_po__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_json_loader_po_loader_translation_zh_tw_po___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_json_loader_po_loader_translation_zh_tw_po__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_json_loader_po_loader_translation_test_po__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_json_loader_po_loader_translation_test_po___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_json_loader_po_loader_translation_test_po__);
 
 
 
@@ -8726,59 +8709,354 @@ module.exports = g;
 
 
 
+// This is for testing purpose only.
 
 
-const translate = (...args) => {
-    //Translate strings using po files.
-    console.log(__WEBPACK_IMPORTED_MODULE_1_json_loader_po_loader_translation_en_po___default.a);
+const lang_map = {
+    de: __WEBPACK_IMPORTED_MODULE_0_json_loader_po_loader_translation_de_po___default.a,
+    en: __WEBPACK_IMPORTED_MODULE_1_json_loader_po_loader_translation_en_po___default.a,
+    es: __WEBPACK_IMPORTED_MODULE_2_json_loader_po_loader_translation_es_po___default.a,
+    fr: __WEBPACK_IMPORTED_MODULE_3_json_loader_po_loader_translation_fr_po___default.a,
+    id: __WEBPACK_IMPORTED_MODULE_4_json_loader_po_loader_translation_id_po___default.a,
+    it: __WEBPACK_IMPORTED_MODULE_5_json_loader_po_loader_translation_it_po___default.a,
+    ja: __WEBPACK_IMPORTED_MODULE_6_json_loader_po_loader_translation_ja_po___default.a,
+    pl: __WEBPACK_IMPORTED_MODULE_7_json_loader_po_loader_translation_pl_po___default.a,
+    pt: __WEBPACK_IMPORTED_MODULE_8_json_loader_po_loader_translation_pt_po___default.a,
+    ru: __WEBPACK_IMPORTED_MODULE_9_json_loader_po_loader_translation_ru_po___default.a,
+    th: __WEBPACK_IMPORTED_MODULE_10_json_loader_po_loader_translation_th_po___default.a,
+    vi: __WEBPACK_IMPORTED_MODULE_11_json_loader_po_loader_translation_vi_po___default.a,
+    zh_cn: __WEBPACK_IMPORTED_MODULE_12_json_loader_po_loader_translation_zh_cn_po___default.a,
+    zh_tw: __WEBPACK_IMPORTED_MODULE_13_json_loader_po_loader_translation_zh_tw_po___default.a,
+    test: __WEBPACK_IMPORTED_MODULE_14_json_loader_po_loader_translation_test_po___default.a,
+};
+
+class Translation {
+    constructor(lang) {
+        this.lang = lang;
+    }
+    /**
+     * 
+     * @param {*} args include string to be translated, its plural form, 
+     * and object containing key value pair for replacement in translated string.
+     * 
+     * For eg: translate('_n Hour','_n Hours',{'_n':2})
+     * Note: The first key-value pair will be used to determine the plural form.
+     * 
+     */
+    translate(...args) {
+        const curr_lang = lang_map[this.lang || 'en'];
+        const str = args[0];
+        let rt_str;
+
+        if (typeof args[1] === 'string') { // Plural conversion
+            const replacer = args[2];
+            const prop = Object.keys(replacer);
+            if (replacer[prop[0]] == 0 || replacer[prop[0]] > 1) { 
+                if (curr_lang[str] && curr_lang[str][2]) {
+                    rt_str = curr_lang[str][2];
+                } else {
+                    rt_str = curr_lang[str] && curr_lang[str][0] ? curr_lang[str][0] : args[1];
+                }
+            } else {
+                rt_str = curr_lang[str] && curr_lang[str][1] ? curr_lang[str][1] : str;
+            }
+            // Replace variables in string with values.
+            rt_str = this.replace(rt_str, replacer);
+        } else {
+            rt_str = curr_lang[str] && curr_lang[str][1] ? curr_lang[str][1] : str;
+            // Replace variables in string with values.
+            rt_str = this.replace(rt_str, args[1]);
+        }
+
+        return rt_str;
+    }
+
+    replace(str, obj) {
+        if (!obj) return str;
+
+        const prop = Object.keys(obj);
+        while (prop.length) {
+            const str_var = prop.shift();
+            str = str.replace(str_var, obj[str_var]);
+        }
+        return str;
+    }
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = translate;
+/* harmony export (immutable) */ __webpack_exports__["a"] = Translation;
 
 
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var context = __webpack_require__(12);
-context.keys().forEach(context);
-module.exports = context;
-
-
-/***/ }),
-/* 59 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dist_main_js__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dist_main_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__dist_main_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_chai__);
-
-
-
-describe('get_bet_parameters',() => {
-    it('lists all the bet parameters', () => {
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__dist_main_js__["get_bet_parameters"])()).to.equal('abcd');
-    })
-})
 
 /***/ }),
 /* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+const find = (array, fn) => {
+    if (Array.prototype.find)
+        return Array.prototype.find.call(array, fn);
+
+    let i = 0;
+    for (; i < array.length; i++)
+        if (fn(array[i]))
+            break;
+
+    return array[i];
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = find;
+
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var context = __webpack_require__(13);
+context.keys().forEach(context);
+module.exports = context;
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_translate_js__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_chai__);
+
+
+
+describe('get_bet_parameters', () => {
+    const active_symbols = [{
+        "allow_forward_starting": 1,
+        "display_name": "Bull Market Index",
+        "exchange_is_open": 1,
+        "is_trading_suspended": 0,
+        "market": "volidx",
+        "market_display_name": "Volatility Indices",
+        "pip": "0.0001",
+        "submarket": "random_daily",
+        "submarket_display_name": "Daily Reset Indices",
+        "symbol": "RDBULL",
+        "symbol_type": "stockindex"
+    },
+    {
+        "allow_forward_starting": 1,
+        "display_name": "Volatility 10 Index",
+        "exchange_is_open": 1,
+        "is_trading_suspended": 0,
+        "market": "volidx",
+        "market_display_name": "Volatility Indices",
+        "pip": "0.001",
+        "submarket": "random_index",
+        "submarket_display_name": "Continuous Indices",
+        "symbol": "R_10",
+        "symbol_type": "stockindex"
+    }];
+
+    it('Throws error if active_symbols is undefined', () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(() => __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('invalid_invalid', 'USD', 0, undefined))
+            .to.throw('Active Symbols list not present');
+    });
+
+    it('Sends "invalid" as bet_type for unsupported shortcodes', () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('invalid_invalid', 'USD', 0, active_symbols).bet_type)
+            .to.equal('Invalid');
+    });
+
+    it('Lists all the bet parameters for contracts with no barriers (Asians)', () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('ASIANU_R_10_3.88_1492410252_5T', 'USD', 0, active_symbols))
+            .to.deep.equal({
+                barrier_count: 0,
+                shortcode: 'ASIANU_R_10_3.88_1492410252_5T',
+                bet_type: 'ASIANU',
+                underlying: "Volatility Indices",
+                underlying_symbol: 'R_10',
+                amount: 3.88,
+                date_start: 1492410252,
+                amount_type: 'payout',
+                tick_expiry: 1,
+                tick_count: 5,
+                currency: 'USD',
+                is_sold: 0
+            });
+    });
+
+    it('Lists all the bet parameters for contracts with no barriers (Normal)', () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492405008_5T_S0P_0', 'USD', 0, active_symbols))
+            .to.deep.equal({
+                barrier_count: 0,
+                shortcode: 'CALL_R_10_10_1492405008_5T_S0P_0',
+                bet_type: 'CALL',
+                underlying: "Volatility Indices",
+                underlying_symbol: 'R_10',
+                amount_type: 'payout',
+                amount: 10,
+                date_start: 1492405008,
+                tick_expiry: 1,
+                tick_count: 5,
+                currency: 'USD',
+                is_sold: 0
+            });
+    });
+
+    it('Lists all the bet parameters for contracts with 1 barriers', () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_70.73_1492407012_5T_S1366P_0', 'USD', 0, active_symbols))
+            .to.deep.equal({
+                barrier_count: 1,
+                shortcode: 'CALL_R_10_70.73_1492407012_5T_S1366P_0',
+                bet_type: 'CALL',
+                underlying: "Volatility Indices",
+                underlying_symbol: 'R_10',
+                amount_type: 'payout',
+                amount: 70.73,
+                date_start: 1492407012,
+                tick_expiry: 1,
+                tick_count: 5,
+                barrier: 1.366,
+                currency: 'USD',
+                is_sold: 0
+            });
+    });
+
+    it('Lists all the bet parameters for contracts with 2 barriers', () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('EXPIRYRANGE_R_10_3.25_1492407769_1492407889_S1796P_S-1795P', 'USD', 0, active_symbols))
+            .to.deep.equal({
+                barrier_count: 2,
+                shortcode: 'EXPIRYRANGE_R_10_3.25_1492407769_1492407889_S1796P_S-1795P',
+                bet_type: 'EXPIRYRANGE',
+                underlying: "Volatility Indices",
+                underlying_symbol: 'R_10',
+                amount_type: 'payout',
+                amount: 3.25,
+                date_start: 1492407769,
+                date_expiry: 1492407889,
+                high_barrier: 1.796,
+                low_barrier: -1.795,
+                currency: 'USD',
+                is_sold: 0
+            });
+    });
+})
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_shortcode_processing_js__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_chai__);
+
+
+
+describe('Main module', () => {
+    let obj, active_symbols;
+
+    before(() => {
+        active_symbols = [{
+            "allow_forward_starting": 1,
+            "display_name": "Bull Market Index",
+            "exchange_is_open": 1,
+            "is_trading_suspended": 0,
+            "market": "volidx",
+            "market_display_name": "Volatility Indices",
+            "pip": "0.0001",
+            "submarket": "random_daily",
+            "submarket_display_name": "Daily Reset Indices",
+            "symbol": "RDBULL",
+            "symbol_type": "stockindex"
+        },
+        {
+            "allow_forward_starting": 1,
+            "display_name": "Volatility 10 Index",
+            "exchange_is_open": 1,
+            "is_trading_suspended": 0,
+            "market": "volidx",
+            "market_display_name": "Volatility Indices",
+            "pip": "0.001",
+            "submarket": "random_index",
+            "submarket_display_name": "Continuous Indices",
+            "symbol": "R_10",
+            "symbol_type": "stockindex"
+        }];
+        obj = new __WEBPACK_IMPORTED_MODULE_0__src_shortcode_processing_js__["a" /* ShortcodeProcessing */](active_symbols, 'en');
+    });
+
+    it('Gets current language', () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(obj.getCurrentLanguage()).to.equal('en');
+    });
+
+    it('Gets current active_symbols', () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(obj.getActiveSymbols()).to.deep.equal(active_symbols);
+    });
+});
+
+/***/ }),
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_translation_js__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_chai__);
 
 
 
 describe("Translations", () => {
-    it("Checks if string is translated", () => {
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_translate_js__["a" /* translate */])();
-    })
+    let translate;
+    before(() => {
+        const t = new __WEBPACK_IMPORTED_MODULE_0__src_translation_js__["a" /* Translation */]('test');
+        translate = (str, str_pl, rp_obj) => {
+            return t.translate(str, str_pl, rp_obj);
+        }
+    });
+
+    it("Returns the string if no translation is present.", () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(translate('Hello')).to.equal('Hello');
+    });
+
+    it("Returns the string after replacing var in it if no translation is present.", () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(translate('Hello _n!', { '_n': 'John Doe' }))
+            .to.equal('Hello John Doe!');
+    });
+
+    it("Returns translated string.", () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(translate('Enter a comma separated list of user names.'))
+            .to.equal('Eine kommagetrennte Liste von Benutzernamen.');
+    });
+
+    it("Returns translated string and replaces variable in it.", () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(translate('How are you _name?', { _name: 'John Doe' }))
+            .to.equal('Wie geht es dir John Doe?');
+    });
+
+    it("Returns untranslated singular string based on variable and replaces variable in it.", () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(translate('_n Hour', '_n Hours', { _n: 1 }))
+            .to.equal('1 Hour');
+    });
+
+    it("Returns untranslated plural string based on variable and replaces variable in it.", () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(translate('_n Hour', '_n Hours', { _n: 2 }))
+            .to.equal('2 Hours');
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(translate('_n Hour', '_n Hours', { _n: 0 }))
+            .to.equal('0 Hours');
+    });
+
+    it("Returns translated singular string based on variable and replaces variable in it.", () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(translate('_n Second', '_n Seconds', { _n: 1 }))
+            .to.equal('1 Sekunde');
+    });
+
+    it("Returns translated plural string based on variable and replaces variable in it.", () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(translate('_n Second', '_n Seconds', { _n: 2 }))
+            .to.equal('2 Sekunden');
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(translate('_n Second', '_n Seconds', { _n: 0 }))
+            .to.equal('0 Sekunden');
+    });
 })
 
 
