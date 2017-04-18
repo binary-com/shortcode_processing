@@ -1,0 +1,59 @@
+# /src/longcode_generator.js 7:15
+msgid ""
+"Win payout [amount] [currency] if the last tick of [underlying] is strictly "
+"higher than the average of the [tick_count] ticks."
+msgstr ""
+
+# /src/longcode_generator.js 10:15
+msgid ""
+"Win payout [amount] [currency] if the last tick of [underlying] is strictly "
+"lower than the average of the [tick_count] ticks."
+msgstr ""
+
+# /src/longcode_generator.js 25:19
+msgid ""
+"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is "
+"strictly higher than [entry_spot]."
+msgstr ""
+
+# /src/longcode_generator.js 30:19
+msgid ""
+"Win payout [amount] [currency] if Volatility 10 Index is strictly higher "
+"than entry spot at [duration] after [date_start]."
+msgstr ""
+
+# /src/longcode_generator.js 39:19
+msgid ""
+"Win payout [amount] [currency] if Volatility 10 Index is strictly higher "
+"than entry spot at [date_expiry]."
+msgstr ""
+
+# /src/longcode_generator.js 49:15
+msgid ""
+"Win payout [amount] [currency] if Volatility 10 Index is strictly higher "
+"than entry spot at [duration] after contract start time."
+msgstr ""
+
+# /src/longcode_generator.js 39:41
+msgid "[n] day"
+msgid_plural "[n] days"
+msgstr[0] ""
+msgstr[1] ""
+
+# /src/longcode_generator.js 41:45
+msgid "[n] hour"
+msgid_plural "[n] hours"
+msgstr[0] ""
+msgstr[1] ""
+
+# /src/longcode_generator.js 43:45
+msgid "[n] minute"
+msgid_plural "[n] minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+# /src/longcode_generator.js 45:45
+msgid "[n] second"
+msgid_plural "[n] seconds"
+msgstr[0] ""
+msgstr[1] ""

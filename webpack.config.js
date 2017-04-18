@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const updateTranslations = require('./custom_plugin/updateTranslations');
 
 const config = {
-  entry: './src/get_bet_parameters.js',
+  entry: './src/shortcode_processing.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',

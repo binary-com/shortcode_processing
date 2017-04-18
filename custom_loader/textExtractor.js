@@ -38,8 +38,9 @@ var formatText = (extracted_obj) => {
     var fileInfo = extracted_obj.path;
     var body = '';
     _.forEach(extracted_obj, (info) => {
-        if(string_map[info.text])
+        if (string_map[info.text]) {
             return;
+        }
         body = body ? body + '\n' : '';
         body += '#' + fileInfo + ' ' + info.loc.line + ':' + info.loc.column + '\n';
         body += 'msgid' + ' "' + info.text + '"\n';
@@ -47,6 +48,7 @@ var formatText = (extracted_obj) => {
             body += 'msgid_plural' + ' "' + info.pluralForm + '"\n';
             body += 'msgstr[0] ""\n';
             body += 'msgstr[1] ""\n';
+            string_map[info.text] = true;
             return;
         }
         body += 'msgstr ""\n';

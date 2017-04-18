@@ -1,4 +1,5 @@
 import {get_bet_parameters as getParameters} from './get_bet_parameters.js';
+import { longcode } from './longcode_generator.js';
 
 export class ShortcodeProcessing {
     constructor(active_symbols, lang) {

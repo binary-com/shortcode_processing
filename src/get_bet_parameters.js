@@ -26,7 +26,7 @@ export const get_bet_parameters = (shortcode, currency, is_sold, active_symbols)
                 barrier_count: 0,
                 shortcode: match[0],
                 bet_type: match[1],
-                underlying: underlying.market_display_name,
+                underlying: underlying.display_name,
                 underlying_symbol: match[2],
                 amount_type: 'payout',
                 amount: +match[3],
@@ -41,17 +41,17 @@ export const get_bet_parameters = (shortcode, currency, is_sold, active_symbols)
             shortcode: match[0],
             bet_type: match[1],
             underlying_symbol: match[2],
-            underlying: underlying.market_display_name,
+            underlying: underlying.display_name,
             amount_type: 'payout',
             amount: +match[3],
             date_start: +match[4].toUpperCase().replace('F', '')
         }
-        if (match[4].toUpperCase().indexOf('F') !== -1) parameters.starts_as_forward_starting = 1;
+        if (match[4].toUpperCase().indexOf('F') !== -1) parameters.is_forward_starting = 1;
         if (match[5].toUpperCase().indexOf('T') !== -1) { // Tick trade
             parameters.tick_expiry = 1;
             parameters.tick_count = +match[5].toUpperCase().replace('T', '');
         } else {
-            if (match[5].toUpperCase().indexOf('F') !== -1) parameter.fixed_expiry = 1;
+            if (match[5].toUpperCase().indexOf('F') !== -1) parameters.fixed_expiry = 1;
             parameters.date_expiry = +match[5].toUpperCase().replace('F', '')
         }
         if (+match[6] === 0) { // No barrier
