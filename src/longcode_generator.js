@@ -104,6 +104,45 @@ export class LongCode {
 
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
         return t.translate('Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.', param);
+      },
+      ONETOUCH: (param) => {
+        if (_this.isDaily(param.date_expiry - param.date_start)) {
+          param.date_expiry = _this.getDate(param.date_expiry);
+          return t.translate('Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].', param);
+        }
+
+        if (param.fixed_expiry === 1) {
+          param.date_expiry = _this.getDateTime(param.date_expiry);
+          return t.translate('Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].', param);
+        }
+
+        param.duration = _this.getDuration(param.date_expiry - param.date_start);
+        return t.translate('Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.', param);
+      },
+      PUT: (param) => {
+        if (param.tick_expiry === 1) { // Tick trade
+          return t.translate('Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].', param)
+        }
+
+        if (param.is_forward_starting === 1) {
+          param.duration = _this.getDuration(param.date_expiry - param.date_start);
+          param.date_start = _this.getDateTime(param.date_start);
+          return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].', param)
+        }
+
+        if (_this.isDaily(param.date_expiry - param.date_start)) {
+          // Daily normal constracts.
+          param.date_expiry = 'close on ' + _this.getDate(param.date_expiry);
+          return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].', param)
+        }
+
+        if (param.fixed_expiry === 1) { //Fixed expiry
+          param.date_expiry = _this.getDateTime(param.date_expiry);
+          return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].', param)
+        }
+        // Intraday normal contracts having duration in minutes, seconds, or hours.
+        param.duration = _this.getDuration(param.date_expiry - param.date_start);
+        return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.', param)
       }
     };
 
@@ -173,7 +212,7 @@ export class LongCode {
     } else {
       param.low_barrier_str = param.low_barrier > 0 ? 'entry spot plus ' + param.low_barrier.replace(/^[\+\-]/g, '') :
         param.low_barrier < 0 ? 'entry spot minus ' + param.low_barrier.replace(/^[\+\-]/g, '') : 'entry spot';
-      param.high_barrier_str = param.high_barrier > 0 ? 'entry spot plus ' + param.high_barrier.replace(/^[\+\-]/g,'') :
+      param.high_barrier_str = param.high_barrier > 0 ? 'entry spot plus ' + param.high_barrier.replace(/^[\+\-]/g, '') :
         param.high_barrier < 0 ? 'entry spot minus ' + param.high_barrier.replace(/^[\+\-]/g, '') : 'entry spot';
     }
 
