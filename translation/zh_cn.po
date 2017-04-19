@@ -16,22 +16,70 @@ msgid ""
 "strictly higher than [entry_spot]."
 msgstr ""
 
-# /src/longcode_generator.js 30:19
+# /src/longcode_generator.js 42:17
 msgid ""
-"Win payout [amount] [currency] if Volatility 10 Index is strictly higher "
-"than entry spot at [duration] after [date_start]."
+"Win payout [amount] [currency] if [underlying] is strictly higher than "
+"[entry_spot] at [duration] after [date_start]."
 msgstr ""
 
-# /src/longcode_generator.js 39:19
+# /src/longcode_generator.js 48:17
 msgid ""
-"Win payout [amount] [currency] if Volatility 10 Index is strictly higher "
-"than entry spot at [date_expiry]."
+"Win payout [amount] [currency] if [underlying] is strictly higher than "
+"[entry_spot] at [date_expiry]."
 msgstr ""
 
-# /src/longcode_generator.js 49:15
+# /src/longcode_generator.js 57:15
 msgid ""
-"Win payout [amount] [currency] if Volatility 10 Index is strictly higher "
-"than entry spot at [duration] after contract start time."
+"Win payout [amount] [currency] if [underlying] is strictly higher than "
+"[entry_spot] at [duration] after contract start time."
+msgstr ""
+
+# /src/longcode_generator.js 60:15
+msgid ""
+"Win payout [amount] [currency] if last digit of [underlying] is not "
+"[barrier] after [tick_count] ticks."
+msgstr ""
+
+# /src/longcode_generator.js 63:15
+msgid ""
+"Win payout [amount] [currency] if last digit of [underlying] is even after "
+"[tick_count] ticks."
+msgstr ""
+
+# /src/longcode_generator.js 66:15
+msgid ""
+"Win payout [amount] [currency] if last digit of [underlying] is [barrier] "
+"after [tick_count] ticks."
+msgstr ""
+
+# /src/longcode_generator.js 69:15
+msgid ""
+"Win payout [amount] [currency] if last digit of [underlying] is odd after "
+"[tick_count] ticks."
+msgstr ""
+
+# /src/longcode_generator.js 72:15
+msgid ""
+"Win payout [amount] [currency] if last digit of [underlying] is higher than "
+"[barrier] after [tick_count] ticks."
+msgstr ""
+
+# /src/longcode_generator.js 75:15
+msgid ""
+"Win payout [amount] [currency] if last digit of [underlying] is lower than "
+"[barrier] after [tick_count] ticks."
+msgstr ""
+
+# /src/longcode_generator.js 90:17
+msgid ""
+"Win payout [amount] [currency] if [underlying] ends outside "
+"[low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
+msgstr ""
+
+# /src/longcode_generator.js 95:17
+msgid ""
+"Win payout [amount] [currency] if [underlying] ends outside "
+"[low_barrier_str] to [high_barrier_str] at [date_expiry]."
 msgstr ""
 
 # /src/longcode_generator.js 39:41
