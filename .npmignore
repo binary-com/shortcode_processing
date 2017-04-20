@@ -4,3 +4,8 @@ node_modules
 src
 tests
 translation
+error.js
+types-of-contracts
+package.json
+yarn.lock
+webpack.config.js

@@ -1,7 +1,7 @@
 import { get_bet_parameters as getParameters } from './get_bet_parameters.js';
 import { LongCode } from './longcode_generator.js';
 
-export class ShortcodeProcessing {
+export class Longcode {
   constructor(...args) {
     if (typeof args[0] !== 'object')
       throw 'Param 1 containing active_symbols is missing.';
@@ -27,7 +27,7 @@ export class ShortcodeProcessing {
     return this.currency;
   }
 
-  getLongcode(shortcode) {
+  get(shortcode) {
     const bet_param = this.getBetParameters(shortcode);
     return this.longcode_gen.get(bet_param);
   }
@@ -48,5 +48,5 @@ export class ShortcodeProcessing {
 }
 
 export default {
-  ShortcodeProcessing
+  Longcode
 }

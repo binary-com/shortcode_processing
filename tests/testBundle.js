@@ -5018,7 +5018,9 @@ const get_bet_parameters = (shortcode, currency, active_symbols) => {
     if (!match) { // Contracts without barriers. Eg: 'Asians'. (Not being racist, it is actually a contract type. Believe me!)
         match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)/);
         if (match) {
-            const underlying = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* find */])(active_symbols, underlying => underlying.symbol === match[2]);
+            const underlying = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* find */])(active_symbols, underlying => underlying.symbol.toUpperCase() === match[2].toUpperCase());
+            if (!underlying)
+                throw 'Underlying not found';
             parameters = {
                 barrier_count: 0,
                 shortcode: match[0],
@@ -5033,8 +5035,10 @@ const get_bet_parameters = (shortcode, currency, active_symbols) => {
             }
         }
     } else { // Normal contracts with at least 1 barrier.
-        const underlying = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* find */])(active_symbols, underlying => underlying.symbol === match[2]);
+        const underlying = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* find */])(active_symbols, underlying => underlying.symbol.toUpperCase() === match[2].toUpperCase());
         const digits_after_decimal = underlying.pip ? ('' + underlying.pip).split('.')[1].length : 2;
+        if (!underlying)
+            throw 'Underlying not found';
         parameters = {
             shortcode: match[0],
             bet_type: match[1],
@@ -17002,8 +17006,8 @@ class Translation {
 
 var map = {
 	"./get_bet_parameters.test.js": 181,
-	"./longcode_generator.test.js": 182,
-	"./shortcode_processing.test.js": 183,
+	"./longcode.test.js": 182,
+	"./longcode_generator.test.js": 183,
 	"./translation.test.js": 184
 };
 function webpackContext(req) {
@@ -26701,7 +26705,7 @@ module.exports = function(module) {
 
 
 
-class ShortcodeProcessing {
+class Longcode {
   constructor(...args) {
     if (typeof args[0] !== 'object')
       throw 'Param 1 containing active_symbols is missing.';
@@ -26727,7 +26731,7 @@ class ShortcodeProcessing {
     return this.currency;
   }
 
-  getLongcode(shortcode) {
+  get(shortcode) {
     const bet_param = this.getBetParameters(shortcode);
     return this.longcode_gen.get(bet_param);
   }
@@ -26746,8 +26750,12 @@ class ShortcodeProcessing {
       || lang === 'ja' || lang === 'pl' || lang === 'pt' || lang === 'ru' || lang === 'vi' || lang === 'zn_cn' || lang === 'zh_tw';
   }
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = ShortcodeProcessing;
+/* harmony export (immutable) */ __webpack_exports__["a"] = Longcode;
 
+
+/* unused harmony default export */ var _unused_webpack_default_export = ({
+  Longcode
+});
 
 
 /***/ }),
@@ -27059,6 +27067,85 @@ describe('get_bet_parameters', () => {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_longcode_js__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_chai__);
+
+
+
+describe('Main module', () => {
+  let active_symbols;
+
+  before(() => {
+    active_symbols = [{
+      "allow_forward_starting": 1,
+      "display_name": "Bull Market Index",
+      "exchange_is_open": 1,
+      "is_trading_suspended": 0,
+      "market": "volidx",
+      "market_display_name": "Volatility Indices",
+      "pip": "0.0001",
+      "submarket": "random_daily",
+      "submarket_display_name": "Daily Reset Indices",
+      "symbol": "RDBULL",
+      "symbol_type": "stockindex"
+    },
+    {
+      "allow_forward_starting": 1,
+      "display_name": "Volatility 10 Index",
+      "exchange_is_open": 1,
+      "is_trading_suspended": 0,
+      "market": "volidx",
+      "market_display_name": "Volatility Indices",
+      "pip": "0.001",
+      "submarket": "random_index",
+      "submarket_display_name": "Continuous Indices",
+      "symbol": "R_10",
+      "symbol_type": "stockindex"
+    }];
+  });
+
+  it('Constructor test', () => {
+    let sp = new __WEBPACK_IMPORTED_MODULE_0__src_longcode_js__["a" /* Longcode */](active_symbols, 'EUR');
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(sp.getCurrentCurrency()).to.equal('EUR');
+    sp = new __WEBPACK_IMPORTED_MODULE_0__src_longcode_js__["a" /* Longcode */](active_symbols);
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(sp.getCurrentCurrency()).to.equal('USD');
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(sp.getCurrentLanguage()).to.equal('en');
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(() => { new __WEBPACK_IMPORTED_MODULE_0__src_longcode_js__["a" /* Longcode */]() }).to.throw('Param 1 containing active_symbols is missing.');
+  });
+
+  it('Returns bet parameter', () => {
+    let sp = new __WEBPACK_IMPORTED_MODULE_0__src_longcode_js__["a" /* Longcode */](active_symbols, 'en', 'EUR');
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(sp.getBetParameters('CALL_R_10_70.73_1492407012_5T_S1366P_0')).to.deep.equal({
+      amount: 70.73,
+      amount_type: 'payout',
+      barrier: '1.366',
+      barrier_count: 1,
+      bet_type: 'CALL',
+      currency: 'EUR',
+      date_start: 1492407012,
+      shortcode: 'CALL_R_10_70.73_1492407012_5T_S1366P_0',
+      tick_count: 5,
+      tick_expiry: 1,
+      underlying: 'Volatility 10 Index',
+      underlying_symbol: 'R_10'
+    });
+  });
+
+  it('Returns longcode', () => {
+    let longcode = new __WEBPACK_IMPORTED_MODULE_0__src_longcode_js__["a" /* Longcode */](active_symbols, 'en', 'EUR');
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(longcode.get('EXPIRYRANGE_RDBULL_10_1492589411_1492590000F_S1776P_S-1775P')).to.equal('Win payout 10 EUR if Bull' +
+      ' Market Index ends strictly between entry spot minus 0.1775 to entry spot plus 0.1776 at 2017-04-19 08:20:00 GMT.');
+  });
+});
+
+
+/***/ }),
+/* 183 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_longcode_generator_js__ = __webpack_require__(129);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chai__ = __webpack_require__(3);
@@ -27319,85 +27406,6 @@ describe('Longcode Generator', () => {
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly lower than entry spot at close on 2017-04-20.');
         });
     });
-});
-
-
-/***/ }),
-/* 183 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_shortcode_processing_js__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_chai___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_chai__);
-
-
-
-describe('Main module', () => {
-  let active_symbols;
-
-  before(() => {
-    active_symbols = [{
-      "allow_forward_starting": 1,
-      "display_name": "Bull Market Index",
-      "exchange_is_open": 1,
-      "is_trading_suspended": 0,
-      "market": "volidx",
-      "market_display_name": "Volatility Indices",
-      "pip": "0.0001",
-      "submarket": "random_daily",
-      "submarket_display_name": "Daily Reset Indices",
-      "symbol": "RDBULL",
-      "symbol_type": "stockindex"
-    },
-    {
-      "allow_forward_starting": 1,
-      "display_name": "Volatility 10 Index",
-      "exchange_is_open": 1,
-      "is_trading_suspended": 0,
-      "market": "volidx",
-      "market_display_name": "Volatility Indices",
-      "pip": "0.001",
-      "submarket": "random_index",
-      "submarket_display_name": "Continuous Indices",
-      "symbol": "R_10",
-      "symbol_type": "stockindex"
-    }];
-  });
-
-  it('Constructor test', () => {
-    let sp = new __WEBPACK_IMPORTED_MODULE_0__src_shortcode_processing_js__["a" /* ShortcodeProcessing */](active_symbols, 'EUR');
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(sp.getCurrentCurrency()).to.equal('EUR');
-    sp = new __WEBPACK_IMPORTED_MODULE_0__src_shortcode_processing_js__["a" /* ShortcodeProcessing */](active_symbols);
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(sp.getCurrentCurrency()).to.equal('USD');
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(sp.getCurrentLanguage()).to.equal('en');
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(() => { new __WEBPACK_IMPORTED_MODULE_0__src_shortcode_processing_js__["a" /* ShortcodeProcessing */]() }).to.throw('Param 1 containing active_symbols is missing.');
-  });
-
-  it('Returns bet parameter', () => {
-    let sp = new __WEBPACK_IMPORTED_MODULE_0__src_shortcode_processing_js__["a" /* ShortcodeProcessing */](active_symbols, 'en', 'EUR');
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(sp.getBetParameters('CALL_R_10_70.73_1492407012_5T_S1366P_0')).to.deep.equal({
-      amount: 70.73,
-      amount_type: 'payout',
-      barrier: '1.366',
-      barrier_count: 1,
-      bet_type: 'CALL',
-      currency: 'EUR',
-      date_start: 1492407012,
-      shortcode: 'CALL_R_10_70.73_1492407012_5T_S1366P_0',
-      tick_count: 5,
-      tick_expiry: 1,
-      underlying: 'Volatility 10 Index',
-      underlying_symbol: 'R_10'
-    });
-  });
-
-  it('Returns longcode', () => {
-    let sp = new __WEBPACK_IMPORTED_MODULE_0__src_shortcode_processing_js__["a" /* ShortcodeProcessing */](active_symbols, 'en', 'EUR');
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(sp.getLongcode('EXPIRYRANGE_RDBULL_10_1492589411_1492590000F_S1776P_S-1775P')).to.equal('Win payout 10 EUR if Bull' + 
-      ' Market Index ends strictly between entry spot minus 0.1775 to entry spot plus 0.1776 at 2017-04-19 08:20:00 GMT.');    
-  });
 });
 
 

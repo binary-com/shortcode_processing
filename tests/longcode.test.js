@@ -1,4 +1,4 @@
-import { ShortcodeProcessing } from '../src/shortcode_processing.js';
+import { Longcode } from '../src/longcode.js';
 import { expect } from 'chai';
 
 describe('Main module', () => {
@@ -34,16 +34,16 @@ describe('Main module', () => {
   });
 
   it('Constructor test', () => {
-    let sp = new ShortcodeProcessing(active_symbols, 'EUR');
+    let sp = new Longcode(active_symbols, 'EUR');
     expect(sp.getCurrentCurrency()).to.equal('EUR');
-    sp = new ShortcodeProcessing(active_symbols);
+    sp = new Longcode(active_symbols);
     expect(sp.getCurrentCurrency()).to.equal('USD');
     expect(sp.getCurrentLanguage()).to.equal('en');
-    expect(() => { new ShortcodeProcessing() }).to.throw('Param 1 containing active_symbols is missing.');
+    expect(() => { new Longcode() }).to.throw('Param 1 containing active_symbols is missing.');
   });
 
   it('Returns bet parameter', () => {
-    let sp = new ShortcodeProcessing(active_symbols, 'en', 'EUR');
+    let sp = new Longcode(active_symbols, 'en', 'EUR');
     expect(sp.getBetParameters('CALL_R_10_70.73_1492407012_5T_S1366P_0')).to.deep.equal({
       amount: 70.73,
       amount_type: 'payout',
@@ -61,8 +61,8 @@ describe('Main module', () => {
   });
 
   it('Returns longcode', () => {
-    let sp = new ShortcodeProcessing(active_symbols, 'en', 'EUR');
-    expect(sp.getLongcode('EXPIRYRANGE_RDBULL_10_1492589411_1492590000F_S1776P_S-1775P')).to.equal('Win payout 10 EUR if Bull' + 
-      ' Market Index ends strictly between entry spot minus 0.1775 to entry spot plus 0.1776 at 2017-04-19 08:20:00 GMT.');    
+    let longcode = new Longcode(active_symbols, 'en', 'EUR');
+    expect(longcode.get('EXPIRYRANGE_RDBULL_10_1492589411_1492590000F_S1776P_S-1775P')).to.equal('Win payout 10 EUR if Bull' +
+      ' Market Index ends strictly between entry spot minus 0.1775 to entry spot plus 0.1776 at 2017-04-19 08:20:00 GMT.');
   });
 });

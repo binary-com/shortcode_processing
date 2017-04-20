@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const updateTranslations = require('./custom_plugin/updateTranslations');
 
 const config = {
-  entry: './src/shortcode_processing.js',
+  entry: './src/longcode.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',

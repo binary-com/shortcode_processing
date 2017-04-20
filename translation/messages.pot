@@ -1,6 +1,5 @@
 
 
-
 #/src/longcode_generator.js 17:15
 msgid "Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks."
 msgstr ""
@@ -136,5 +135,6 @@ msgid "[n] second"
 msgid_plural "[n] seconds"
 msgstr[0] ""
 msgstr[1] ""
+
 
 
