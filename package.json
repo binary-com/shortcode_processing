@@ -6,7 +6,7 @@
   "name": "binary_shortcode_processing",
   "description": "Convert Binary.com's shorcode to longcode",
   "version": "0.0.1",
-  "main": "dist/main.bundle.js",
+  "main": "dist/main.js",
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
