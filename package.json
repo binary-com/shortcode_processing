@@ -1,8 +1,5 @@
 {
-  "dependencies": {
-    "lodash": "^4.17.4",
-    "moment": "^2.18.1"
-  },
+  "dependencies": {},
   "name": "binary_shortcode_processing",
   "description": "Convert Binary.com's shorcode to longcode",
   "version": "0.0.1",
