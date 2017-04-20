@@ -23,6 +23,7 @@ console.log(longcodeGenerator.get('some_short_code'));
 ```
 Or:
 ```
+var moment = require('moment');
 var longcode = require('binary-com-longcode').Longcode;
 var longcodeGenerator = new Longcode(active_symbols, language, currency);
 
