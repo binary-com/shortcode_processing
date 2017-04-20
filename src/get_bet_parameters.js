@@ -19,7 +19,9 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
     if (!match) { // Contracts without barriers. Eg: 'Asians'. (Not being racist, it is actually a contract type. Believe me!)
         match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)/);
         if (match) {
-            const underlying = find(active_symbols, underlying => underlying.symbol === match[2]);
+            const underlying = find(active_symbols, underlying => underlying.symbol.toUpperCase() === match[2].toUpperCase());
+            if (!underlying)
+                throw 'Underlying not found';
             parameters = {
                 barrier_count: 0,
                 shortcode: match[0],
@@ -34,8 +36,10 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
             }
         }
     } else { // Normal contracts with at least 1 barrier.
-        const underlying = find(active_symbols, underlying => underlying.symbol === match[2]);
+        const underlying = find(active_symbols, underlying => underlying.symbol.toUpperCase() === match[2].toUpperCase());
         const digits_after_decimal = underlying.pip ? ('' + underlying.pip).split('.')[1].length : 2;
+        if (!underlying)
+            throw 'Underlying not found';
         parameters = {
             shortcode: match[0],
             bet_type: match[1],

@@ -7,7 +7,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
-    library: 'shortcode_processing',
+    library: 'binary-com-longcode',
     libraryTarget: 'umd'
   },
   module: {

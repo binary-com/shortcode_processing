@@ -1,6 +1,6 @@
 {
   "dependencies": {},
-  "name": "binary_shortcode_processing",
+  "name": "binary-com-longcode",
   "description": "Convert Binary.com's shorcode to longcode",
   "version": "0.0.1",
   "main": "dist/main.js",
