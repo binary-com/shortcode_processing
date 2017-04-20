@@ -2,9 +2,9 @@ import { find } from './utils';
 
 /**
  * Created by Apoorv Joshi on 17/04/2017
- * @param {*} shortcode 
- * @param {*} currency 
- * @param {*} is_sold 
+ * @param {*} shortcode
+ * @param {*} currency
+ * @param {*} is_sold
  */
 export const get_bet_parameters = (shortcode, currency, active_symbols) => {
     let parameters = {
@@ -37,9 +37,9 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
         }
     } else { // Normal contracts with at least 1 barrier.
         const underlying = find(active_symbols, underlying => underlying.symbol.toUpperCase() === match[2].toUpperCase());
-        const digits_after_decimal = underlying.pip ? ('' + underlying.pip).split('.')[1].length : 2;
         if (!underlying)
             throw 'Underlying not found';
+        const digits_after_decimal = underlying.pip ? ('' + underlying.pip).split('.')[1].length : 2;
         parameters = {
             shortcode: match[0],
             bet_type: match[1],
