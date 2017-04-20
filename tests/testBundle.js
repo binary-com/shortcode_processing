@@ -5001,9 +5001,9 @@ module.exports = __webpack_require__(175);
 
 /**
  * Created by Apoorv Joshi on 17/04/2017
- * @param {*} shortcode 
- * @param {*} currency 
- * @param {*} is_sold 
+ * @param {*} shortcode
+ * @param {*} currency
+ * @param {*} is_sold
  */
 const get_bet_parameters = (shortcode, currency, active_symbols) => {
     let parameters = {
@@ -5036,9 +5036,9 @@ const get_bet_parameters = (shortcode, currency, active_symbols) => {
         }
     } else { // Normal contracts with at least 1 barrier.
         const underlying = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* find */])(active_symbols, underlying => underlying.symbol.toUpperCase() === match[2].toUpperCase());
-        const digits_after_decimal = underlying.pip ? ('' + underlying.pip).split('.')[1].length : 2;
         if (!underlying)
             throw 'Underlying not found';
+        const digits_after_decimal = underlying.pip ? ('' + underlying.pip).split('.')[1].length : 2;
         parameters = {
             shortcode: match[0],
             bet_type: match[1],
