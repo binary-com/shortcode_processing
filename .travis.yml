@@ -6,6 +6,7 @@ install:
 - yarn
 script:
 - yarn test
+- yarn build-prod
 deploy:
   provider: npm
   email: apoorv@binary.com
