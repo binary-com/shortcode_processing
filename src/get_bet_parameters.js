@@ -29,7 +29,7 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
                 underlying: underlying.display_name,
                 underlying_symbol: match[2],
                 amount_type: 'payout',
-                amount: +match[3],
+                amount: (+match[3]).toFixed(2),
                 date_start: +match[4],
                 tick_expiry: 1,
                 tick_count: +match[5].toUpperCase().replace('T', '')
@@ -46,7 +46,7 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
             underlying_symbol: match[2],
             underlying: underlying.display_name,
             amount_type: 'payout',
-            amount: +match[3],
+            amount: (+match[3]).toFixed(2),
             date_start: +match[4].toUpperCase().replace('F', '')
         }
         if (match[4].toUpperCase().indexOf('F') !== -1) parameters.is_forward_starting = 1;

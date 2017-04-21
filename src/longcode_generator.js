@@ -14,135 +14,135 @@ export class LongCode {
     bet_param = this.processBarrier(bet_param);
     const contract_map = {
       ASIANU: (param) => {
-        return t.translate('Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.', param);
       },
       ASIAND: (param) => {
-        return t.translate('Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.', param);
       },
       CALL: (param) => {
         if (param.tick_expiry === 1) { // Tick trade
-          return t.translate('Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].', param)
+          return t.translate('[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].', param)
         }
 
         if (param.is_forward_starting === 1) {
           param.duration = _this.getDuration(param.date_expiry - param.date_start);
           param.date_start = _this.getDateTime(param.date_start);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].', param)
         }
 
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           // Daily normal constracts.
           param.date_expiry = 'close on ' + _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].', param)
         }
 
         if (param.fixed_expiry === 1) { //Fixed expiry
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].', param)
         }
         // Intraday normal contracts having duration in minutes, seconds, or hours.
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.', param)
+        return t.translate('[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.', param)
       },
       DIGITDIFF: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.', param);
       },
       DIGITEVEN: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.', param);
       },
       DIGITMATCH: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.', param);
       },
       DIGITODD: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.', param);
       },
       DIGITOVER: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.', param);
       },
       DIGITUNDER: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.', param);
       },
       EXPIRYMISS: (param) => {
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           param.date_expiry = _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].', param);
         }
 
         if (param.fixed_expiry === 1) {
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].', param);
         }
 
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.', param);
+        return t.translate('[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.', param);
       },
       EXPIRYRANGE: (param) => {
 
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           param.date_expiry = _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].', param);
         }
 
         if (param.fixed_expiry === 1) {
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].', param);
         }
 
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.', param);
+        return t.translate('[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.', param);
       },
       NOTOUCH: (param) => {
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           param.date_expiry = _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].', param);
         }
 
         if (param.fixed_expiry === 1) {
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].', param);
         }
 
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.', param);
+        return t.translate('[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.', param);
       },
       ONETOUCH: (param) => {
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           param.date_expiry = _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].', param);
         }
 
         if (param.fixed_expiry === 1) {
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].', param);
         }
 
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.', param);
+        return t.translate('[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.', param);
       },
       PUT: (param) => {
         if (param.tick_expiry === 1) { // Tick trade
-          return t.translate('Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].', param)
+          return t.translate('[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].', param)
         }
 
         if (param.is_forward_starting === 1) {
           param.duration = _this.getDuration(param.date_expiry - param.date_start);
           param.date_start = _this.getDateTime(param.date_start);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].', param)
         }
 
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           // Daily normal constracts.
           param.date_expiry = 'close on ' + _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].', param)
         }
 
         if (param.fixed_expiry === 1) { //Fixed expiry
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].', param)
         }
         // Intraday normal contracts having duration in minutes, seconds, or hours.
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.', param)
+        return t.translate('[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.', param)
       }
     };
 
