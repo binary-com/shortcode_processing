@@ -1,7 +1,15 @@
 language: node_js
 node_js:
-  - "6"
-install: 
-  - "yarn"
+- '6'
+cache: yarn
+install:
+- yarn
 script:
-  - "yarn test"
+- yarn test
+deploy:
+  provider: npm
+  email: apoorv@binary.com
+  api_key:
+    secure: sPiGRXpSYhPCenF8dcYL/k61MD0jK+ZnWRJsLqaQZtEuef0T7MRusdG08IScZ/wUPlfn7wp1IWsEA0nGPpG6cGdvPUoL/pW+xJiAlQU+Ce+2nNG4FLagA3UuYHMv86HR9/jKRumOyD6PSMEX0bjTKt0zoycckEWOXt9RRbf+ySH27WpKgR9ZSVD+17j91Iy6PndQgIi7x7b+6bA7HV/Aq3nDloWI+VjcrhDJhLIBdUG+SLnaPKFM602PPhypXiEL843LK1xo+1ucYZQa+hp3QlunsgqKM0Zxe4zvSaDdPXUr9WARzdR0aT6asTetETmq5dXT5jRMXNWyIFE5yYGpxXS6AQ+MCL4kDOl4jn9qXlZt40bG18Govmqj+G1NoyZvKgistKksM+QEYO6eNd94/GQVLYF2CzLI9nduRoHZE9IQEUTERO8xQPMuNG/8eqStyPfHvdGlp9/Vszvk1pkjVlfQc2UtFAfocPdtZ4CYLqSYWT16t9IDxwBa8p5LxWGBs6OUpE6QRstepNmgO2d2UTbJZBCymiEnhIjkIJ1oV/+8DQY+bMK304oOz07LCGREZ8i8UlAgKf18Sy09JcgxGk+trsJSXPesRKoQFJfqsLFiKVPsYL4MXIa+7mdyCmccFMXegbG55G01/l64wPRT7wbTxttFKl9q1jATl643Xgo=
+  on:
+    branch: master

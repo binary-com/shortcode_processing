@@ -1,4 +1,4 @@
-# shortcode_processing [![Build Status](https://travis-ci.org/4p00rv/shortcode_processing.svg?branch=master)](https://travis-ci.org/4p00rv/shortcode_processing)
+# shortcode_processing [![Build Status](https://travis-ci.org/binary-com/shortcode_processing.svg?branch=master)](https://travis-ci.org/binary-com/shortcode_processing)
 This project is used for converting [**Binary.com**](https://www.binary.com) provided short-code to long-code.
 
 Usage:
