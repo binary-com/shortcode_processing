@@ -254,4 +254,14 @@ describe('Longcode Generator', () => {
             expect(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly lower than entry spot at close on 2017-04-20.');
         });
     });
+
+    it('Detects invalid contracts', () => {
+        let param = get_bet_parameters('Some_invalid_longcode', 'USD', active_symbols);
+        expect(longcode.get(param)).to.equal('Invalid short code.');
+    });
+
+    it('Detects legacy contracts', () => {
+        let param = get_bet_parameters('SPREADU_R_10_1_1490952253_1_1.55_POINT', 'USD', active_symbols);
+        expect(longcode.get(param)).to.equal('Legacy contract. No further information is available.');
+    });
 });

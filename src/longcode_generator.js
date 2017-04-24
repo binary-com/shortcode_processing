@@ -143,9 +143,14 @@ export class LongCode {
         // Intraday normal contracts having duration in minutes, seconds, or hours.
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
         return t.translate('[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.', param)
+      },
+      SPREAD: () => {
+        return t.translate('Legacy contract. No further information is available.');
       }
     };
-
+    if(typeof contract_map[bet_param.bet_type] === 'undefined'){
+      return 'Invalid short code.';
+    }
     return contract_map[bet_param.bet_type](bet_param);
   }
 
