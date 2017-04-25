@@ -12,9 +12,8 @@ For `yarn`, use:
 $ yarn add binary-com-longcode
 ```
 
-In code: (requires `moment`)
+In code: 
 ```
-import moment from 'moment';
 import {Longcode} from 'binary-com-longcode';
 
 const longcodeGenerator = new Longcode(active_symbols, language, currency);
@@ -23,7 +22,6 @@ console.log(longcodeGenerator.get('some_short_code'));
 ```
 Or:
 ```
-var moment = require('moment');
 var longcode = require('binary-com-longcode').Longcode;
 var longcodeGenerator = new Longcode(active_symbols, language, currency);
 
