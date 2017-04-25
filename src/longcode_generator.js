@@ -1,5 +1,5 @@
-import { Translation } from '../src/translation.js';
-import moment from 'moment';
+import { Translation } from './translation.js';
+import { dateProcessor } from './utils.js';
 
 export class LongCode {
 
@@ -151,7 +151,7 @@ export class LongCode {
 
   //Returns duration in humanized format. Eg: 12 hours 1 minute 20 seconds
   getDuration(diff) {
-    const duration = moment.duration(diff * 1000);
+    const duration = dateProcessor(diff * 1000);
     const t = this.t;
     let duration_str = '';
     if (duration.days()) duration_str += t.translate('[n] day', '[n] days', {
@@ -181,17 +181,17 @@ export class LongCode {
 
   //Converts time stamp to date.
   getDateTime(ts) {
-    return moment.utc(ts * 1000).format('YYYY-MM-DD HH:mm:ss') + ' GMT';
+    return dateProcessor(ts * 1000).getDateTime() + ' GMT';
   }
 
   //Returns the date from timestamp.
   getDate(ts) {
-    return moment.utc(ts * 1000).format('YYYY-MM-DD');
+    return dateProcessor(ts * 1000).getDate();
   }
 
   //Checks if contract is daily.
   isDaily(diff) {
-    return moment.duration(diff * 1000).days() > 0;
+    return dateProcessor(diff * 1000).days() > 0;
   }
 
   processBarrier(param) {
