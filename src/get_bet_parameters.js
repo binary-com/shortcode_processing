@@ -15,9 +15,9 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
     if (!active_symbols)
         throw 'Active Symbols list not present';
     //Contracts with barrier
-    let match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)_(S?-?\d+P?)_(S?-?\d+P?)/);
+    let match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)_(S?-?\d+P?)_(S?-?\d+P?)$/);
     if (!match) { // Contracts without barriers. Eg: 'Asians'. (Not being racist, it is actually a contract type. Believe me!)
-        match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)/);
+        match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)$/);
         if (match) {
             const underlying = find(active_symbols, underlying => underlying.symbol.toUpperCase() === match[2].toUpperCase());
             if (!underlying)
@@ -34,6 +34,9 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
                 tick_expiry: 1,
                 tick_count: +match[5].toUpperCase().replace('T', '')
             }
+        } else { //Legacy contract
+            if(/^SPREAD/.test(shortcode))
+            parameters.bet_type = 'SPREAD';
         }
     } else { // Normal contracts with at least 1 barrier.
         const underlying = find(active_symbols, underlying => underlying.symbol.toUpperCase() === match[2].toUpperCase());
@@ -82,6 +85,7 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
             }
         }
     }
+
 
     parameters.currency = currency;
 

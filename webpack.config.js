@@ -29,9 +29,6 @@ const config = {
         }]
       }]
   },
-  externals: {
-    moment: 'moment'
-  },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
