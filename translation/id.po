@@ -2,7 +2,7 @@ msgid "[currency] [amount] payout if the last tick of [underlying] is strictly h
 msgstr "Hasil [currency] [amount] jika tik terakhir [underlying] pasti lebih tinggi dari rata-rata is [tick_count] tik."
 
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "Hasil [currency] [amount] jika tik terakhir [underlying] pasti lebih rendahi dari rata-rata [tick_count] tik."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot]."
 msgstr ""
