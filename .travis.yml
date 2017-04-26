@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+- '6'
+cache: yarn
+install:
+- yarn
+script:
+- yarn test
+- yarn build-prod
+deploy:
+  provider: npm
+  email: apoorv@binary.com
+  api_key:
+    secure: OpKjH+b/J90H9BA2WmT3ScSFiWXtzRsbKVXqXGqTK3ArUam7sgrjKGM1GkuPJ8SxySBWE2zM2DLGnfUXIhXSWcafvJIMeuBTkgp8lXAZM04UlQ7jyiD3e6yJJTFFldUaZivOxWHp7v7089sesr+30WTt7uqbgfVZARN7kQWmAk2oxKcMIi+tRUq4rKwP08Bz2vkWGUPkCYEBCygpDLs6UtrSODYaaltKv77WhUMfNnIgCCrYZa5zuyWZ7+KcS9yX3TE0pUS1MKHcLDphm6oZzihty1Tl71oQYN+ULOE5ixyQhLTw0IvG0lvl25FEtFY/cDaNP6Cs2/8EClPm29ld8ziwHWUpXLJW0HLcid7k2eUtAJ3ghCtS46aeGtc902FQjPkmUjzpbTa/6dW612ClM8GK7S+7tsCc+bE8pVGI+0p4QzVrjx5R6ZLdAfOK7C7hOWTLzlpxwFpaENZw+C8bWotNQgzgcvbFzeqvdFQL8a1Qofq54bu4OqinkbhXp/d0DD2/CLODH6Au5qj85fVcJAYgRFfznhBe8qmY1/hIkQIlrscuqnAbE7DjM2tbmGWwNGoPakUv6Pw3ghQf1AFRSK6vroZW4us+F9bljkOObad/j6qMwpn1vIaPnPISmom/gfP00v1v2op5X+4K2hlkSjQEh+Xnt02phYm33mrzS6k=
+  on:
+    repo: binary-com/shortcode_processing
