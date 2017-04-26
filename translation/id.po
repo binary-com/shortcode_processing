@@ -59,16 +59,16 @@ msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] th
 msgstr "Hasil [currency] [amount] jika [underlying] tidak menyentuh [entry_spot] hingga [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "Hasil [currency] [amount] jika [underlying] tidak menyentuh [entry_spot] hingga [duration] setelah waktu mulai kontrak."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "Hasil [currency] [amount] jika [underlying] menyentuh [entry_spot] hingga penutupan pada [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "Hasil [currency] [amount] jika [underlying] menyentuh [entry_spot] hingga [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "Hasil [currency] [amount] jika [underlying] menyentuh [entry_spot] hingga [duration] setelah waktu mulai kontak."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot]."
 msgstr "Hasil [currency] [amount] jika [underlying] setelah [tick_count] tik pasti lebih rendah dari [entry_spot]."
