@@ -5028,7 +5028,7 @@ const get_bet_parameters = (shortcode, currency, active_symbols) => {
                 underlying: underlying.display_name,
                 underlying_symbol: match[2],
                 amount_type: 'payout',
-                amount: +match[3],
+                amount: (+match[3]).toFixed(2),
                 date_start: +match[4],
                 tick_expiry: 1,
                 tick_count: +match[5].toUpperCase().replace('T', '')
@@ -5045,7 +5045,7 @@ const get_bet_parameters = (shortcode, currency, active_symbols) => {
             underlying_symbol: match[2],
             underlying: underlying.display_name,
             amount_type: 'payout',
-            amount: +match[3],
+            amount: (+match[3]).toFixed(2),
             date_start: +match[4].toUpperCase().replace('F', '')
         }
         if (match[4].toUpperCase().indexOf('F') !== -1) parameters.is_forward_starting = 1;
@@ -16664,135 +16664,135 @@ class LongCode {
     bet_param = this.processBarrier(bet_param);
     const contract_map = {
       ASIANU: (param) => {
-        return t.translate('Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.', param);
       },
       ASIAND: (param) => {
-        return t.translate('Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.', param);
       },
       CALL: (param) => {
         if (param.tick_expiry === 1) { // Tick trade
-          return t.translate('Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].', param)
+          return t.translate('[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].', param)
         }
 
         if (param.is_forward_starting === 1) {
           param.duration = _this.getDuration(param.date_expiry - param.date_start);
           param.date_start = _this.getDateTime(param.date_start);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].', param)
         }
 
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           // Daily normal constracts.
           param.date_expiry = 'close on ' + _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].', param)
         }
 
         if (param.fixed_expiry === 1) { //Fixed expiry
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].', param)
         }
         // Intraday normal contracts having duration in minutes, seconds, or hours.
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.', param)
+        return t.translate('[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.', param)
       },
       DIGITDIFF: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.', param);
       },
       DIGITEVEN: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.', param);
       },
       DIGITMATCH: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.', param);
       },
       DIGITODD: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.', param);
       },
       DIGITOVER: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.', param);
       },
       DIGITUNDER: (param) => {
-        return t.translate('Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.', param);
+        return t.translate('[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.', param);
       },
       EXPIRYMISS: (param) => {
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           param.date_expiry = _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].', param);
         }
 
         if (param.fixed_expiry === 1) {
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].', param);
         }
 
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.', param);
+        return t.translate('[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.', param);
       },
       EXPIRYRANGE: (param) => {
 
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           param.date_expiry = _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].', param);
         }
 
         if (param.fixed_expiry === 1) {
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].', param);
         }
 
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.', param);
+        return t.translate('[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.', param);
       },
       NOTOUCH: (param) => {
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           param.date_expiry = _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].', param);
         }
 
         if (param.fixed_expiry === 1) {
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].', param);
         }
 
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.', param);
+        return t.translate('[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.', param);
       },
       ONETOUCH: (param) => {
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           param.date_expiry = _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].', param);
         }
 
         if (param.fixed_expiry === 1) {
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].', param);
+          return t.translate('[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].', param);
         }
 
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.', param);
+        return t.translate('[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.', param);
       },
       PUT: (param) => {
         if (param.tick_expiry === 1) { // Tick trade
-          return t.translate('Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].', param)
+          return t.translate('[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].', param)
         }
 
         if (param.is_forward_starting === 1) {
           param.duration = _this.getDuration(param.date_expiry - param.date_start);
           param.date_start = _this.getDateTime(param.date_start);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].', param)
         }
 
         if (_this.isDaily(param.date_expiry - param.date_start)) {
           // Daily normal constracts.
           param.date_expiry = 'close on ' + _this.getDate(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].', param)
         }
 
         if (param.fixed_expiry === 1) { //Fixed expiry
           param.date_expiry = _this.getDateTime(param.date_expiry);
-          return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].', param)
+          return t.translate('[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].', param)
         }
         // Intraday normal contracts having duration in minutes, seconds, or hours.
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
-        return t.translate('Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.', param)
+        return t.translate('[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.', param)
       }
     };
 
@@ -26846,7 +26846,7 @@ describe('get_bet_parameters', () => {
                     bet_type: 'ASIANU',
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
-                    amount: 3.88,
+                    amount: '3.88',
                     date_start: 1492410252,
                     amount_type: 'payout',
                     tick_expiry: 1,
@@ -26864,7 +26864,7 @@ describe('get_bet_parameters', () => {
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
                     amount_type: 'payout',
-                    amount: 10,
+                    amount: '10.00',
                     date_start: 1492405008,
                     tick_expiry: 1,
                     tick_count: 5,
@@ -26881,7 +26881,7 @@ describe('get_bet_parameters', () => {
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
                     amount_type: 'payout',
-                    amount: 70.73,
+                    amount: '70.73',
                     date_start: 1492407012,
                     tick_expiry: 1,
                     tick_count: 5,
@@ -26899,7 +26899,7 @@ describe('get_bet_parameters', () => {
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
                     amount_type: 'payout',
-                    amount: 3.25,
+                    amount: '3.25',
                     date_start: 1492407769,
                     date_expiry: 1492407889,
                     high_barrier: '1.796',
@@ -26919,7 +26919,7 @@ describe('get_bet_parameters', () => {
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
                     amount_type: 'payout',
-                    amount: 10,
+                    amount: '10.00',
                     date_start: 1492585652,
                     date_expiry: 1492732799,
                     currency: 'USD'
@@ -26936,7 +26936,7 @@ describe('get_bet_parameters', () => {
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
                     amount_type: 'payout',
-                    amount: 10,
+                    amount: '10.00',
                     date_start: 1492582188,
                     date_expiry: 1492732799,
                     fixed_expiry: 1,
@@ -26959,7 +26959,7 @@ describe('get_bet_parameters', () => {
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
                     amount_type: 'payout',
-                    amount: 2.2,
+                    amount: '2.20',
                     date_start: 1492408062,
                     tick_count: 5,
                     tick_expiry: 1,
@@ -26978,7 +26978,7 @@ describe('get_bet_parameters', () => {
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
                     amount_type: 'payout',
-                    amount: 18.18,
+                    amount: '18.18',
                     date_start: 1492407891,
                     tick_count: 5,
                     tick_expiry: 1,
@@ -26997,7 +26997,7 @@ describe('get_bet_parameters', () => {
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
                     amount_type: 'payout',
-                    amount: 4.88,
+                    amount: '4.88',
                     date_start: 1492408153,
                     tick_count: 5,
                     tick_expiry: 1,
@@ -27016,7 +27016,7 @@ describe('get_bet_parameters', () => {
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
                     amount_type: 'payout',
-                    amount: 2.82,
+                    amount: '2.82',
                     date_start: 1492408225,
                     tick_count: 5,
                     tick_expiry: 1,
@@ -27033,7 +27033,7 @@ describe('get_bet_parameters', () => {
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
                     amount_type: 'payout',
-                    amount: 3.92,
+                    amount: '3.92',
                     date_start: 1492408262,
                     tick_count: 5,
                     tick_expiry: 1,
@@ -27050,7 +27050,7 @@ describe('get_bet_parameters', () => {
                     underlying: "Volatility 10 Index",
                     underlying_symbol: 'R_10',
                     amount_type: 'payout',
-                    amount: 3.92,
+                    amount: '3.92',
                     date_start: 1492410208,
                     tick_count: 5,
                     tick_expiry: 1,
@@ -27117,7 +27117,7 @@ describe('Main module', () => {
   it('Returns bet parameter', () => {
     let sp = new __WEBPACK_IMPORTED_MODULE_0__src_longcode_js__["a" /* Longcode */](active_symbols, 'en', 'EUR');
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(sp.getBetParameters('CALL_R_10_70.73_1492407012_5T_S1366P_0')).to.deep.equal({
-      amount: 70.73,
+      amount: '70.73',
       amount_type: 'payout',
       barrier: '1.366',
       barrier_count: 1,
@@ -27134,7 +27134,7 @@ describe('Main module', () => {
 
   it('Returns longcode', () => {
     let longcode = new __WEBPACK_IMPORTED_MODULE_0__src_longcode_js__["a" /* Longcode */](active_symbols, 'en', 'EUR');
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(longcode.get('EXPIRYRANGE_RDBULL_10_1492589411_1492590000F_S1776P_S-1775P')).to.equal('Win payout 10 EUR if Bull' +
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(longcode.get('EXPIRYRANGE_RDBULL_10_1492589411_1492590000F_S1776P_S-1775P')).to.equal('EUR 10.00 payout if Bull' +
       ' Market Index ends strictly between entry spot minus 0.1775 to entry spot plus 0.1776 at 2017-04-19 08:20:00 GMT.');
   });
 });
@@ -27186,100 +27186,100 @@ describe('Longcode Generator', () => {
     describe('ASIAN', () => {
         it('ASIANU contract type.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('ASIANU_R_10_3.88_1492410252_5T', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 3.88 USD if the last tick of Volatility 10 Index is strictly higher than the average of the 5 ticks.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 3.88 payout if the last tick of Volatility 10 Index is strictly higher than the average of the 5 ticks.');
         });
 
         it('ASIAND contract type.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('ASIAND_R_10_3.88_1492410530_5T', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 3.88 USD if the last tick of Volatility 10 Index is strictly lower than the average of the 5 ticks.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 3.88 payout if the last tick of Volatility 10 Index is strictly lower than the average of the 5 ticks.');
         });
     });
 
     describe('CALL', () => {
         it('Contract having no barrier and tick as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492495694_5T_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index after 5 ticks is strictly higher than entry spot.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index after 5 ticks is strictly higher than entry spot.');
         });
 
         it('Contract having +ve barrier and tick as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492495842_5T_S364P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index after 5 ticks is strictly higher than entry spot plus 0.364.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index after 5 ticks is strictly higher than entry spot plus 0.364.');
         });
 
         it('Contract having -ve barrier and tick as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492496024_5T_S-364P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index after 5 ticks is strictly higher than entry spot minus 0.364.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index after 5 ticks is strictly higher than entry spot minus 0.364.');
         });
 
         it('Contracts having +ve barrier and hours as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492585037_1492592365_S628P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly higher than entry spot plus 0.628 at 2 hours 2 minutes 8 seconds after contract start time.')
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly higher than entry spot plus 0.628 at 2 hours 2 minutes 8 seconds after contract start time.')
         });
 
         it('Contracts having -ve barrier and hours as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492585037_1492592365_S-628P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly higher than entry spot minus 0.628 at 2 hours 2 minutes 8 seconds after contract start time.')
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly higher than entry spot minus 0.628 at 2 hours 2 minutes 8 seconds after contract start time.')
         });
 
         it('Contracts having absolute barrier and days as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492585652_1492732799_10862000000_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly higher than 10862.000 at close on 2017-04-20.')
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly higher than 10862.000 at close on 2017-04-20.')
         });
 
         it('Forward starting contract.', () => {
             let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492498500F_1492502760_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly higher than entry spot at 1 hour 11 minutes after 2017-04-18 06:55:00 GMT.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly higher than entry spot at 1 hour 11 minutes after 2017-04-18 06:55:00 GMT.');
             param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492501500F_1492552200F_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly higher than entry spot at 14 hours 5 minutes after 2017-04-18 07:45:00 GMT.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly higher than entry spot at 14 hours 5 minutes after 2017-04-18 07:45:00 GMT.');
         });
 
         it('Intraday contract having fixed expiry.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492501145_1492559400F_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly higher than entry spot at 2017-04-18 23:50:00 GMT.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly higher than entry spot at 2017-04-18 23:50:00 GMT.');
         });
 
         it('Daily contract having fixed expiry.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492501623_1493423999F_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly higher than entry spot at close on 2017-04-28.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly higher than entry spot at close on 2017-04-28.');
         });
 
         it('Normal contracts.', () => {
             let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492501916_1492505656_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly higher than entry spot at 1 hour 2 minutes 20 seconds after contract start time.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly higher than entry spot at 1 hour 2 minutes 20 seconds after contract start time.');
             param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('CALL_R_10_10_1492502097_1493596799_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly higher than entry spot at close on 2017-04-30.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly higher than entry spot at close on 2017-04-30.');
         });
     });
 
     describe('DIGIT', () => {
         it('DIGITDIFF contracts', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('DIGITDIFF_R_10_2.2_1492408062_5T_4_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 2.2 USD if last digit of Volatility 10 Index is not 4 after 5 ticks.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 2.20 payout if last digit of Volatility 10 Index is not 4 after 5 ticks.');
         });
 
         it('DIGITEVEN contracts', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('DIGITEVEN_R_10_3.92_1492410208_5T_0_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 3.92 USD if last digit of Volatility 10 Index is even after 5 ticks.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 3.92 payout if last digit of Volatility 10 Index is even after 5 ticks.');
         });
 
         it('DIGITMATCH contracts', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('DIGITMATCH_R_10_18.18_1492407891_5T_4_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 18.18 USD if last digit of Volatility 10 Index is 4 after 5 ticks.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 18.18 payout if last digit of Volatility 10 Index is 4 after 5 ticks.');
         });
 
         it('DIGITODD contracts', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('DIGITODD_R_10_3.92_1492408262_5T_0_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 3.92 USD if last digit of Volatility 10 Index is odd after 5 ticks.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 3.92 payout if last digit of Volatility 10 Index is odd after 5 ticks.');
         });
 
         it('DIGITOVER contracts', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('DIGITOVER_R_10_4.88_1492408153_5T_5_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 4.88 USD if last digit of Volatility 10 Index is higher than 5 after 5 ticks.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 4.88 payout if last digit of Volatility 10 Index is higher than 5 after 5 ticks.');
         });
 
         it('DIGITUNDER contracts', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('DIGITUNDER_R_10_2.82_1492408225_5T_7_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 2.82 USD if last digit of Volatility 10 Index is lower than 7 after 5 ticks.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 2.82 payout if last digit of Volatility 10 Index is lower than 7 after 5 ticks.');
         });
     });
 
@@ -27287,34 +27287,34 @@ describe('Longcode Generator', () => {
         describe('EXPIRYMISS', () => {
             it('Fixed expiry contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('EXPIRYMISS_R_10_10_1492580629_1492580760F_S1776P_S-1775P', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index ends outside entry spot minus 1.775 to entry spot plus 1.776 at 2017-04-19 05:46:00 GMT.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index ends outside entry spot minus 1.775 to entry spot plus 1.776 at 2017-04-19 05:46:00 GMT.');
             });
 
             it('Daily contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('EXPIRYMISS_R_10_10_1492586396_1492732799_10815110000_10811123000', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index ends outside 10811.123 to 10815.110 at close on 2017-04-20.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index ends outside 10811.123 to 10815.110 at close on 2017-04-20.');
             });
 
             it('Duration contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('EXPIRYMISS_R_10_10_1492587192_1492592712_S1776P_S-1775P', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index ends outside entry spot minus 1.775 to entry spot plus 1.776 at 1 hour 32 minutes after contract start time.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index ends outside entry spot minus 1.775 to entry spot plus 1.776 at 1 hour 32 minutes after contract start time.');
             });
         });
 
         describe('EXPIRYRANGE', () => {
             it('Fixed expiry contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('EXPIRYRANGE_R_10_10_1492589411_1492590000F_S1776P_S-1775P', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index ends strictly between entry spot minus 1.775 to entry spot plus 1.776 at 2017-04-19 08:20:00 GMT.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index ends strictly between entry spot minus 1.775 to entry spot plus 1.776 at 2017-04-19 08:20:00 GMT.');
             });
 
             it('Daily contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('EXPIRYRANGE_R_10_10_1492589155_1492732799_10860715000_10765447000', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index ends strictly between 10765.447 to 10860.715 at close on 2017-04-20.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index ends strictly between 10765.447 to 10860.715 at close on 2017-04-20.');
             });
 
             it('Duration contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('EXPIRYRANGE_R_10_10_1492588292_1492593812_S1776P_S-1775P', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index ends strictly between entry spot minus 1.775 to entry spot plus 1.776 at 1 hour 32 minutes after contract start time.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index ends strictly between entry spot minus 1.775 to entry spot plus 1.776 at 1 hour 32 minutes after contract start time.');
             });
         });
     });
@@ -27323,30 +27323,30 @@ describe('Longcode Generator', () => {
         describe('NOTOUCH', () => {
             it('Fixed expiry contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('NOTOUCH_R_10_10_1492592137_1492592280F_S1000P_0', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index does not touch entry spot plus 1.000 through 2017-04-19 08:58:00 GMT.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index does not touch entry spot plus 1.000 through 2017-04-19 08:58:00 GMT.');
             });
             it('Daily contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('NOTOUCH_R_10_10_1492592475_1492732799_10860715000_0', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index does not touch 10860.715 through close on 2017-04-20.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index does not touch 10860.715 through close on 2017-04-20.');
             });
             it('Duration contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('NOTOUCH_R_10_10_1492592618_1492597118_S5000P_0', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index does not touch entry spot plus 5.000 through 1 hour 15 minutes after contract start time.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index does not touch entry spot plus 5.000 through 1 hour 15 minutes after contract start time.');
             })
         });
 
         describe('ONETOUCH', () => {
             it('Fixed expiry contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('ONETOUCH_R_10_10_1492594876_1492617000F_S628P_0', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index touches entry spot plus 0.628 through 2017-04-19 15:50:00 GMT.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index touches entry spot plus 0.628 through 2017-04-19 15:50:00 GMT.');
             });
             it('Daily contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('ONETOUCH_R_10_10_1492594822_1492732799_10862018000_0', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index touches 10862.018 through close on 2017-04-20.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index touches 10862.018 through close on 2017-04-20.');
             });
             it('Duration contracts', () => {
                 let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('ONETOUCH_R_10_10_1492594129_1492599649_S628P_0', 'USD', active_symbols);
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index touches entry spot plus 0.628 through 1 hour 32 minutes after contract start time.');
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index touches entry spot plus 0.628 through 1 hour 32 minutes after contract start time.');
             });
         });
     });
@@ -27354,56 +27354,56 @@ describe('Longcode Generator', () => {
     describe('PUT', () => {
         it('Contract having no barrier and tick as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492596425_5T_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index after 5 ticks is strictly lower than entry spot.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index after 5 ticks is strictly lower than entry spot.');
         });
 
         it('Contract having +ve barrier and tick as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492596389_5T_S628P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index after 5 ticks is strictly lower than entry spot plus 0.628.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index after 5 ticks is strictly lower than entry spot plus 0.628.');
         });
 
         it('Contract having -ve barrier and tick as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492596328_5T_S-628P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index after 5 ticks is strictly lower than entry spot minus 0.628.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index after 5 ticks is strictly lower than entry spot minus 0.628.');
         });
 
         it('Contracts having +ve barrier and hours as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492596187_1492653787_S628P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly lower than entry spot plus 0.628 at 16 hours after contract start time.')
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly lower than entry spot plus 0.628 at 16 hours after contract start time.')
         });
 
         it('Contracts having -ve barrier and hours as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492595967_1492653567_S-628P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly lower than entry spot minus 0.628 at 16 hours after contract start time.')
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly lower than entry spot minus 0.628 at 16 hours after contract start time.')
         });
 
         it('Contracts having absolute barrier and days as duration.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492595891_1492732799_10862018000_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly lower than 10862.018 at close on 2017-04-20.')
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly lower than 10862.018 at close on 2017-04-20.')
         });
 
         it('Forward starting contract.', () => {
             let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492595700F_1492609020_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly lower than entry spot at 3 hours 42 minutes after 2017-04-19 09:55:00 GMT.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly lower than entry spot at 3 hours 42 minutes after 2017-04-19 09:55:00 GMT.');
             param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492596300F_1492617000F_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly lower than entry spot at 5 hours 45 minutes after 2017-04-19 10:05:00 GMT.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly lower than entry spot at 5 hours 45 minutes after 2017-04-19 10:05:00 GMT.');
         });
 
         it('Intraday contract having fixed expiry.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492595519_1492617000F_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly lower than entry spot at 2017-04-19 15:50:00 GMT.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly lower than entry spot at 2017-04-19 15:50:00 GMT.');
         });
 
         it('Daily contract having fixed expiry.', () => {
             const param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492595588_1492819199F_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly lower than entry spot at close on 2017-04-21.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly lower than entry spot at close on 2017-04-21.');
         });
 
         it('Normal contracts.', () => {
             let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492595816_1492600816_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly lower than entry spot at 1 hour 23 minutes 20 seconds after contract start time.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly lower than entry spot at 1 hour 23 minutes 20 seconds after contract start time.');
             param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492595725_1492732799_S0P_0', 'USD', active_symbols);
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Win payout 10 USD if Volatility 10 Index is strictly lower than entry spot at close on 2017-04-20.');
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly lower than entry spot at close on 2017-04-20.');
         });
     });
 });

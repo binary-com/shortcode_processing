@@ -45,7 +45,7 @@ describe('Main module', () => {
   it('Returns bet parameter', () => {
     let sp = new Longcode(active_symbols, 'en', 'EUR');
     expect(sp.getBetParameters('CALL_R_10_70.73_1492407012_5T_S1366P_0')).to.deep.equal({
-      amount: 70.73,
+      amount: '70.73',
       amount_type: 'payout',
       barrier: '1.366',
       barrier_count: 1,
@@ -62,7 +62,7 @@ describe('Main module', () => {
 
   it('Returns longcode', () => {
     let longcode = new Longcode(active_symbols, 'en', 'EUR');
-    expect(longcode.get('EXPIRYRANGE_RDBULL_10_1492589411_1492590000F_S1776P_S-1775P')).to.equal('Win payout 10 EUR if Bull' +
+    expect(longcode.get('EXPIRYRANGE_RDBULL_10_1492589411_1492590000F_S1776P_S-1775P')).to.equal('EUR 10.00 payout if Bull' +
       ' Market Index ends strictly between entry spot minus 0.1775 to entry spot plus 0.1776 at 2017-04-19 08:20:00 GMT.');
   });
 });
