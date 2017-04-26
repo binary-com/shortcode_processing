@@ -113,25 +113,29 @@ msgstr ""
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time."
 msgstr ""
 
-#/src/longcode_generator.js 157:41
+#/src/longcode_generator.js 148:15
+msgid "Legacy contract. No further information is available."
+msgstr ""
+
+#/src/longcode_generator.js 162:41
 msgid "[n] day"
 msgid_plural "[n] days"
 msgstr[0] ""
 msgstr[1] ""
 
-#/src/longcode_generator.js 161:43
+#/src/longcode_generator.js 166:43
 msgid "[n] hour"
 msgid_plural "[n] hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#/src/longcode_generator.js 167:43
+#/src/longcode_generator.js 172:43
 msgid "[n] minute"
 msgid_plural "[n] minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#/src/longcode_generator.js 173:43
+#/src/longcode_generator.js 178:43
 msgid "[n] second"
 msgid_plural "[n] seconds"
 msgstr[0] ""

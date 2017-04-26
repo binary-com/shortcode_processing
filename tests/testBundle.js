@@ -544,9 +544,9 @@ const get_bet_parameters = (shortcode, currency, active_symbols) => {
     if (!active_symbols)
         throw 'Active Symbols list not present';
     //Contracts with barrier
-    let match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)_(S?-?\d+P?)_(S?-?\d+P?)/);
+    let match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)_(S?-?\d+P?)_(S?-?\d+P?)$/);
     if (!match) { // Contracts without barriers. Eg: 'Asians'. (Not being racist, it is actually a contract type. Believe me!)
-        match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)/);
+        match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)$/);
         if (match) {
             const underlying = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils__["b" /* find */])(active_symbols, underlying => underlying.symbol.toUpperCase() === match[2].toUpperCase());
             if (!underlying)
@@ -563,6 +563,9 @@ const get_bet_parameters = (shortcode, currency, active_symbols) => {
                 tick_expiry: 1,
                 tick_count: +match[5].toUpperCase().replace('T', '')
             }
+        } else { //Legacy contract
+            if(/^SPREAD/.test(shortcode))
+            parameters.bet_type = 'SPREAD';
         }
     } else { // Normal contracts with at least 1 barrier.
         const underlying = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils__["b" /* find */])(active_symbols, underlying => underlying.symbol.toUpperCase() === match[2].toUpperCase());
@@ -611,6 +614,7 @@ const get_bet_parameters = (shortcode, currency, active_symbols) => {
             }
         }
     }
+
 
     parameters.currency = currency;
 
@@ -1304,9 +1308,14 @@ class LongCode {
         // Intraday normal contracts having duration in minutes, seconds, or hours.
         param.duration = _this.getDuration(param.date_expiry - param.date_start);
         return t.translate('[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.', param)
+      },
+      SPREAD: () => {
+        return t.translate('Legacy contract. No further information is available.');
       }
     };
-
+    if(typeof contract_map[bet_param.bet_type] === 'undefined'){
+      return 'Invalid short code.';
+    }
     return contract_map[bet_param.bet_type](bet_param);
   }
 
@@ -8786,115 +8795,119 @@ module.exports = Array.isArray || function (arr) {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -8925,115 +8938,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -9064,115 +9081,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -9203,115 +9224,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -9342,115 +9367,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -9481,115 +9510,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -9620,115 +9653,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -9759,115 +9796,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -9898,115 +9939,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -10037,115 +10082,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -10209,115 +10258,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -10348,115 +10401,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -10487,115 +10544,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -10626,115 +10687,119 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
+	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is even after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is odd after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
+	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through close on [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [date_expiry].": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] touches [entry_spot] through [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time.": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
+	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
 		""
 	],
-	"Win payout [amount] [currency] if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
+		null,
+		""
+	],
+	"Legacy contract. No further information is available.": [
 		null,
 		""
 	],
@@ -11269,6 +11334,11 @@ describe('get_bet_parameters', () => {
                     currency: 'USD',
                 });
         });
+    });
+
+    it('Returns bet_type as SPREAD for legacy contracts', () => {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__["a" /* get_bet_parameters */])("SPREADU_R_10_1_1490952253_1_1.55_POINT", 'USD', active_symbols).bet_type)
+            .to.equal('SPREAD');
     })
 });
 
@@ -11617,6 +11687,16 @@ describe('Longcode Generator', () => {
             param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('PUT_R_10_10_1492595725_1492732799_S0P_0', 'USD', active_symbols);
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('USD 10.00 payout if Volatility 10 Index is strictly lower than entry spot at close on 2017-04-20.');
         });
+    });
+
+    it('Detects invalid contracts', () => {
+        let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('Some_invalid_longcode', 'USD', active_symbols);
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Invalid short code.');
+    });
+
+    it('Detects legacy contracts', () => {
+        let param = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('SPREADU_R_10_1_1490952253_1_1.55_POINT', 'USD', active_symbols);
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_chai__["expect"])(longcode.get(param)).to.equal('Legacy contract. No further information is available.');
     });
 });
 

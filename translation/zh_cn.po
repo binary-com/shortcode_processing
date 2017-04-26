@@ -167,6 +167,10 @@ msgid ""
 "[entry_spot] at [duration] after contract start time."
 msgstr ""
 
+# /src/longcode_generator.js 148:15
+msgid "Legacy contract. No further information is available."
+msgstr ""
+
 # /src/longcode_generator.js 39:41
 msgid "[n] day"
 msgid_plural "[n] days"

@@ -259,5 +259,10 @@ describe('get_bet_parameters', () => {
                     currency: 'USD',
                 });
         });
+    });
+
+    it('Returns bet_type as SPREAD for legacy contracts', () => {
+        expect(get_bet_parameters("SPREADU_R_10_1_1490952253_1_1.55_POINT", 'USD', active_symbols).bet_type)
+            .to.equal('SPREAD');
     })
 });
