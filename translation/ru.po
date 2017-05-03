@@ -1,23 +1,23 @@
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя котировка [underlying] будет строго выше, чем общее среднее значение [tick_count] тика/ов."
 
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последний тик [underlying] будет строго ниже, чем среднее значение [tick_count] тика/ов."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] после [tick_count] тика/ов будет строго выше [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] будет строго выше [entry_spot] через [duration] после [date_start]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] будет строго выше [entry_spot] во время [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] будет строго выше [entry_spot] через [duration] после времени начала контракта."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] не будет равна [barrier] после [tick_count] тика/ов."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
 msgstr ""
