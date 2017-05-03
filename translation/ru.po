@@ -20,34 +20,34 @@ msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier]
 msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] не будет равна [barrier] после [tick_count] тика/ов."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] будет чётным числом через [tick_count] тик (тика/тиков)."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] совпадёт с [barrier] через [tick_count] тик (тика/тиков)."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] будет нечётным числом через [tick_count] тик (тика/тиков)."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] будет выше [barrier] через [tick_count] тик (тика/тиков)."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] будет ниже [barrier] через [tick_count] тик (тика/тиков)."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] окажется вне диапазона от [low_barrier_str] до [high_barrier_str] на момент закрытия [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] окажется вне диапазона от [low_barrier_str] до [high_barrier_str] на момент [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] окажется вне диапазона от [low_barrier_str] до [high_barrier_str] через [duration] после времени начала контракта."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] окажется строго в пределах диапазона от [low_barrier_str] до [high_barrier_str] на момент закрытия [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] окончится строго в пределах диапазона от [low_barrier_str] до [high_barrier_str] в момент [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
 msgstr ""
