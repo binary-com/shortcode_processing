@@ -87,9 +87,9 @@ msgstr "Nieaktualny kontrakt. Brak dodatkowych informacji."
 
 msgid "[n] day"
 msgid_plural "[n] days"
-msgstr[0] ""
+msgstr[0] "dzień [n]"
 msgstr[1] ""
-msgstr[2] ""
+msgstr[2] "[n] dni"
 
 msgid "[n] hour"
 msgid_plural "[n] hours"
