@@ -5,46 +5,46 @@ msgid "[currency] [amount] payout if the last tick of [underlying] is strictly l
 msgstr "[currency] [amount] Auszahlung, wenn der letzte Tick [underlying] ausdrücklich niedriger als der Durchschnitt der [tick_count] Ticks ist."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot]."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] nach [tick_count] Ticks ausdrücklich höher ist als [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] ausdrücklich höher als [entry_spot] zu [duration] nach [date_start] ist."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] ausdrücklich höher als [entry_spot] zum [date_expiry] ist."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] ausdrücklich höher als [entry_spot] zu [duration] nach der Startzeit des Kontrakts ist."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn die letzte Ziffer des [underlying] nach [tick_count] Ticks nicht [barrier] ist."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn die letzte Ziffer des [underlying] nach [tick_count] Ticks gerade ist."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn die letzte Ziffer des [underlying] nach [tick_count] Ticks [barrier] ist."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn die letzte Ziffer des [underlying] nach [tick_count] Ticks ungerade ist."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn die letzte Ziffer des [underlying] nach [tick_count] Ticks höher als [barrier] ist."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn die letzte Ziffer des [underlying] nach [tick_count] Ticks niedriger als [barrier] ist."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] innerhalb [low_barrier_str] bis [high_barrier_str] zum Schluss auf [date_expiry] endet."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] außerhalb [low_barrier_str] bis [high_barrier_str] zum [date_expiry] endet."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] außerhalb [low_barrier_str] bis [high_barrier_str] zu [duration] nach der Startzeit des Kontrakts endet."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] ausdrücklich zwischen [low_barrier_str] und [high_barrier_str] zum Schluss auf [date_expiry] endet."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry]."
 msgstr ""
