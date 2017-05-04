@@ -35,13 +35,13 @@ msgid "[currency] [amount] payout if last digit of [underlying] is lower than [b
 msgstr "[currency] [amount] Auszahlung, wenn die letzte Ziffer des [underlying] nach [tick_count] Ticks niedriger als [barrier] ist."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr "[currency] [amount] Auszahlung, wenn [underlying] innerhalb [low_barrier_str] bis [high_barrier_str] zum Schluss auf [date_expiry] endet."
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] innerhalb [low_barrier_str] und [high_barrier_str] zum Schluss auf [date_expiry] endet."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr "[currency] [amount] Auszahlung, wenn [underlying] außerhalb [low_barrier_str] bis [high_barrier_str] zum [date_expiry] endet."
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] außerhalb [low_barrier_str] und [high_barrier_str] zum [date_expiry] endet."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr "[currency] [amount] Auszahlung, wenn [underlying] außerhalb [low_barrier_str] bis [high_barrier_str] zu [duration] nach der Startzeit des Kontrakts endet."
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] außerhalb [low_barrier_str] und [high_barrier_str] zu [duration] nach der Startzeit des Kontrakts endet."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
 msgstr "[currency] [amount] Auszahlung, wenn [underlying] ausdrücklich zwischen [low_barrier_str] und [high_barrier_str] zum Schluss auf [date_expiry] endet."
@@ -80,7 +80,7 @@ msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_
 msgstr "[currency] [amount] Auszahlung, wenn [underlying] ausdrücklich niedriger als [entry_spot] zum [date_expiry] ist."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time."
-msgstr "[currency] [amount] Auszahlung, wenn [underlying] ausdrücklich niedriger als [entry_spot] zu [duration] nach der Startzeit des Kontrakts ist."
+msgstr "[currency] [amount] Auszahlung, wenn [underlying] ausdrücklich niedriger als [entry_spot] zu [duration] nach der Startzeit des Kontraktes ist."
 
 msgid "Legacy contract. No further information is available."
 msgstr "Erbschaftsvertrag. Es stehen keine weiteren Informationen zur Verfügung."
