@@ -1,110 +1,110 @@
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя котировка [underlying] будет строго выше, чем общее среднее значение [tick_count] тика/ов."
 
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последний тик [underlying] будет строго ниже, чем среднее значение [tick_count] тика/ов."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] после [tick_count] тика/ов будет строго выше [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] будет строго выше [entry_spot] через [duration] после [date_start]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] будет строго выше [entry_spot] во время [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] будет строго выше [entry_spot] через [duration] после времени начала контракта."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] не будет равна [barrier] после [tick_count] тика/ов."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] будет чётным числом через [tick_count] тик (тика/тиков)."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] совпадёт с [barrier] через [tick_count] тик (тика/тиков)."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] будет нечётным числом через [tick_count] тик (тика/тиков)."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] будет выше [barrier] через [tick_count] тик (тика/тиков)."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если последняя десятичная [underlying] будет ниже [barrier] через [tick_count] тик (тика/тиков)."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] окажется вне диапазона от [low_barrier_str] до [high_barrier_str] на момент закрытия [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] окажется вне диапазона от [low_barrier_str] до [high_barrier_str] на момент [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] окажется вне диапазона от [low_barrier_str] до [high_barrier_str] через [duration] после времени начала контракта."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] окажется строго в пределах диапазона от [low_barrier_str] до [high_barrier_str] на момент закрытия [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] окончится строго в пределах диапазона от [low_barrier_str] до [high_barrier_str] в момент [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] окончится строго в пределах диапазона от [low_barrier_str] до [high_barrier_str] через [duration] после начала контракта."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] не коснётся [entry_spot] к моменту закрытия [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] не коснётся [entry_spot] до [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] не коснётся [entry_spot] в течение [duration] после начала контракта."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] коснётся [entry_spot] к моменту закрытия [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] коснётся [entry_spot] к моменту [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] коснётся [entry_spot] в течение [duration] после начала контракта."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] после [tick_count] тика/ов будет строго ниже [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] будет строго ниже [entry_spot] через [duration] после [date_start]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] будет строго ниже [entry_spot] на момент [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "Получить выплату [currency] [amount], если [underlying] будет строго ниже [entry_spot] в течение [duration] после начала контракта."
 
 msgid "Legacy contract. No further information is available."
-msgstr ""
+msgstr "Традиционный контракт. Информация недоступна."
 
 msgid "[n] day"
 msgid_plural "[n] days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "[n] дн."
+msgstr[1] "[n] дн."
 msgstr[2] "[n] дн."
 
 msgid "[n] hour"
 msgid_plural "[n] hours"
 msgstr[0] "[n] час."
-msgstr[1] ""
-msgstr[2] ""
+msgstr[1] "[n] час."
+msgstr[2] "[n] час."
 
 msgid "[n] minute"
 msgid_plural "[n] minutes"
 msgstr[0] "[n] мин."
-msgstr[1] ""
-msgstr[2] ""
+msgstr[1] "[n] мин."
+msgstr[2] "[n] мин."
 
 msgid "[n] second"
 msgid_plural "[n] seconds"
 msgstr[0] "[n] сек."
-msgstr[1] ""
-msgstr[2] ""
+msgstr[1] "[n] сек."
+msgstr[2] "[n] сек."
