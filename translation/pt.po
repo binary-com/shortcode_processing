@@ -35,10 +35,10 @@ msgid "[currency] [amount] payout if last digit of [underlying] is lower than [b
 msgstr "Prêmio de [amount] [currency] se o último dígito de [underlying] for inferior a [barrier] depois de [tick_count] tique-taques."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] terminar fora de [low_barrier_str] a [high_barrier_str] no fecho em [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] terminar fora de [low_barrier_str] a [high_barrier_str] em [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
 msgstr ""
