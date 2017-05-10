@@ -1,11 +1,11 @@
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "Prêmio de [currency] [amount] se o último tique-taque de [underlying] for estritamente superior à média dos [tick_count] tique-taques."
 
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "Prêmio de [currency] [amount] se o último tique-taque de [underlying] for estritamente inferior à média dos [tick_count] tique-taques."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot]."
-msgstr ""
+msgstr "Prêmio de [currency] [amount] se [underlying], depois de [tick_count] tique-taques for estritamente superior a [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start]."
 msgstr ""
