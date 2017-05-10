@@ -26,13 +26,13 @@ msgid "[currency] [amount] payout if last digit of [underlying] is [barrier] aft
 msgstr "Prêmio de [amount] [currency] se o último dígito de [underlying] for [barrier] depois de [tick_count] tique-taques."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se o último dígito de [underlying] for ímpar depois de [tick_count] tique-taques."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se o último dígito de [underlying] for superior a [barrier] depois de [tick_count] tique-taques."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se o último dígito de [underlying] for inferior a [barrier] depois de [tick_count] tique-taques."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
 msgstr ""
