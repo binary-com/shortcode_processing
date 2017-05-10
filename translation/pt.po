@@ -17,13 +17,13 @@ msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry
 msgstr "Prêmio de [amount] [currency] se [underlying] for estritamente superior a [entry_spot] às [duration] depois da hora de início do contrato."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se o último dígito de [underlying] não for [barrier] depois de [tick_count] tique-taques."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se último dígito de [underlying] for par depois de [tick_count] tique-taques."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se o último dígito de [underlying] for [barrier] depois de [tick_count] tique-taques."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks."
 msgstr ""
