@@ -83,12 +83,12 @@ msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_
 msgstr "Prêmio de [amount] [currency] se [underlying] for estritamente inferior a [entry_spot] depois de [duration] desde a hora de início do contrato."
 
 msgid "Legacy contract. No further information is available."
-msgstr ""
+msgstr "Contrato herdado. Nenhumas informações adicionais disponíveis."
 
 msgid "[n] day"
 msgid_plural "[n] days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "[n] dia"
+msgstr[1] "[n] dias"
 
 msgid "[n] hour"
 msgid_plural "[n] hours"
