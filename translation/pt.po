@@ -56,13 +56,13 @@ msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] th
 msgstr "Prêmio de [amount] [currency] se [underlying] não tocar em [entry_spot] até ao fecho em [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] não tocar em [entry_spot] até [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] não tocar em [entry_spot] até [duration] depois da hora de início do contrato."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] toca em [entry_spot] até ao fecho em [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
 msgstr ""
