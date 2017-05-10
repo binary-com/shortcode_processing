@@ -41,19 +41,19 @@ msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str]
 msgstr "Prêmio de [amount] [currency] se [underlying] terminar fora de [low_barrier_str] a [high_barrier_str] em [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr "Prêmio de [amount] [currency] se [underlying] terminar fora de [low_barrier_str] a [high_barrier_str] depois de [duration] depois do início do contrato."
+msgstr "Prêmio de [amount] [currency] se [underlying] terminar fora de [low_barrier_str] a [high_barrier_str] depois de [duration] depois da hora de início do contrato."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
 msgstr "Prêmio de [amount] [currency] se [underlying] terminar estritamente entre [low_barrier_str] e [high_barrier_str] no fecho em [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] terminar estritamente entre [low_barrier_str] e [high_barrier_str] em [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "Prêmio de [currency] [amount] se [underlying] terminar estritamente entre [low_barrier_str] e [high_barrier_str] depois de [duration] desde a hora de início do contrato."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] não tocar em [entry_spot] até ao fecho em [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry]."
 msgstr ""
