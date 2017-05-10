@@ -65,22 +65,22 @@ msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through c
 msgstr "Prêmio de [amount] [currency] se [underlying] toca em [entry_spot] até ao fecho em [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] toca em [entry_spot] até [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] toca em [entry_spot] até [duration] depois do início da hora de início do contrato."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot]."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] depois de [tick_count] tique-taques for estritamente inferior a [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] for estritamente inferior a [entry_spot] depois de [duration] desde [date_start]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] for estritamente inferior a [entry_spot] em [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "Prêmio de [amount] [currency] se [underlying] for estritamente inferior a [entry_spot] depois de [duration] desde a hora de início do contrato."
 
 msgid "Legacy contract. No further information is available."
 msgstr ""
