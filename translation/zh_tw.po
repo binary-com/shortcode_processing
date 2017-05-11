@@ -1,102 +1,102 @@
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "如果[underlying] 的最後跳動點嚴格高於[tick_count] 的平均跳動點，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "如果[underlying] 的最後跳動點嚴格低於[tick_count] 的平均跳動點，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot]."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 嚴格高於[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "[date_start] 後[duration] 時如果[underlying] 嚴格高於[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 時如果[underlying] 嚴格高於[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "合約開始後[duration] 時如果[underlying] 嚴格高於[entry_spot] ，可獲得 [currency] [amount] 賠付。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字不是[barrier]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字是偶數，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字是[barrier]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字是奇數，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字高於[barrier]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字低於[barrier]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 収市時如果[underlying] 平倉價在[low_barrier_str] 和[high_barrier_str] 範圍外，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 時如果[underlying] 平倉價在[low_barrier_str] 和[high_barrier_str] 範圍外，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "合約開始後[duration] 時如果[underlying] 平倉價在[low_barrier_str] 和[high_barrier_str] 範圍外，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 収市時如果[underlying] 嚴格収於[low_barrier_str] 和[high_barrier_str] 範圍內，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 時如果[underlying] 嚴格収於[low_barrier_str] 和[high_barrier_str] 範圍內，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "合約開始後[duration] 時如果[underlying] 嚴格収於[low_barrier_str] 和[high_barrier_str] 範圍內，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 閉市時如果[underlying] 未觸及[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 時如果[underlying] 未觸及[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "合約開始後[duration] 期內如果[underlying] 未觸及[entry_spot]，可獲得 [currency] [amount] 賠付。"
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 閉市時如果[underlying] 觸及[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 時如果[underlying] 觸及[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "合約開始後[duration] 期內如果[underlying] 觸及[entry_spot]，可獲得 [currency] [amount] 賠付。"
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot]."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 嚴格低於[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "[date_start] 後[duration] 時如果[underlying] 嚴格低於[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 時如果[underlying] 嚴格低於[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "合約開始後[duration] 時如果[underlying] 嚴格低於[entry_spot] ，可獲得 [currency] [amount] 賠付。"
 
 msgid "Legacy contract. No further information is available."
-msgstr ""
+msgstr "舊版合約。無法提供更加詳細的資訊。"
 
 msgid "[n] day"
 msgid_plural "[n] days"
-msgstr[0] ""
+msgstr[0] "[n] 天"
 
 msgid "[n] hour"
 msgid_plural "[n] hours"
-msgstr[0] ""
+msgstr[0] "[n] 小時"
 
 msgid "[n] minute"
 msgid_plural "[n] minutes"
-msgstr[0] ""
+msgstr[0] "[n] 分鐘"
 
 msgid "[n] second"
 msgid_plural "[n] seconds"
-msgstr[0] ""
+msgstr[0] "[n] 秒"
