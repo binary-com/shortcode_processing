@@ -11,31 +11,31 @@ msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry
 msgstr "[date_start] 後[duration] 時如果[underlying] 嚴格高於[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 時如果[underlying] 嚴格高於[entry_spot]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time."
 msgstr "合約開始後[duration] 時如果[underlying] 嚴格高於[entry_spot] ，可獲得 [currency] [amount] 賠付。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字不是[barrier]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字是偶數，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字是[barrier]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字是奇數，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字高於[barrier]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[tick_count] 跳動點後如果[underlying] 的最後數字低於[barrier]，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 時如果[underlying] 平倉價在[low_barrier_str] 和[high_barrier_str] 範圍外，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
 msgstr ""
