@@ -35,22 +35,22 @@ msgid "[currency] [amount] payout if last digit of [underlying] is lower than [b
 msgstr "[tick_count] 跳动点后如果[underlying] 的最后数字低于[barrier]，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 闭市时如果[underlying] 平仓价在[low_barrier_str] 和[high_barrier_str] 范围外，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 时如果[underlying] 平仓价在[low_barrier_str] 和[high_barrier_str] 范围外，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "合约开始后如果[underlying] 平仓价在[low_barrier_str] 和[high_barrier_str] 范围外，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 闭市时如果[underlying] 严格收于[low_barrier_str] 和[high_barrier_str] 范围内，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 时如果[underlying] 严格收于[low_barrier_str] 和[high_barrier_str] 范围内，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "合约开始后 [duration] 时如果[underlying] 严格收于[low_barrier_str] 和[high_barrier_str] 范围内，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry]."
 msgstr ""
