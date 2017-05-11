@@ -83,20 +83,20 @@ msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_
 msgstr "合约开始后 [duration] 时如果[underlying] 严格低于[entry_spot]，可获取 [currency] [amount] 赔付额。"
 
 msgid "Legacy contract. No further information is available."
-msgstr ""
+msgstr "旧版合约。无法提供更加详细的信息。"
 
 msgid "[n] day"
 msgid_plural "[n] days"
-msgstr[0] ""
+msgstr[0] "[n] 天"
 
 msgid "[n] hour"
 msgid_plural "[n] hours"
-msgstr[0] ""
+msgstr[0] "[n] 小时"
 
 msgid "[n] minute"
 msgid_plural "[n] minutes"
-msgstr[0] ""
+msgstr[0] "[n] 分钟"
 
 msgid "[n] second"
 msgid_plural "[n] seconds"
-msgstr[0] ""
+msgstr[0] "[n] 秒"
