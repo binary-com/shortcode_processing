@@ -1,17 +1,17 @@
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "如果[underlying] 的最后跳动点严格高于[tick_count] 的平均跳动点，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "如果[underlying] 的最后跳动点严格低于[tick_count] 的平均跳动点，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot]."
-msgstr ""
+msgstr "[tick_count] 跳动点后如果[underlying] 严格高于[entry_spot]，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "[date_start] 后 [duration] 时如果[underlying] 严格高于[entry_spot]，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "[date_expiry] 时如果[underlying] 严格高于[entry_spot]，可获取 [currency] [amount] 赔付额。"
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time."
 msgstr ""
