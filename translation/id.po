@@ -1,4 +1,7 @@
 msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+msgid ""
 "[currency] [amount] payout if the last tick of [underlying] is strictly "
 "higher than the average of the [tick_count] ticks."
 msgstr ""
