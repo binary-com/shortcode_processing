@@ -41,31 +41,31 @@ msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str]
 msgstr ""
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] wykroczy poza przedział od [low_barrier_str] do [high_barrier_str] po [duration] od czasu rozpoczęcia kontraktu."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] będzie mieścić się w przedziale od [low_barrier_str] do [high_barrier_str] w momencie zamknięcia kontraktu dnia [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] będzie mieścić się w przedziale od [low_barrier_str] do [high_barrier_str] o [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] będzie mieścić się w przedziale od [low_barrier_str] do [high_barrier_str] po [duration] od czasu rozpoczęcia kontraktu."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] nie osiągnie tej samej wartości, co [entry_spot] do czasu zamknięcia kontraktu dnia [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] nie osiągnie tej samej wartości, co [entry_spot] przez [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] nie osiągnie tej samo wartości, co [entry_spot] przez [duration] po rozpoczęciu kontraktu."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] osiągnie tę samo wartość, co [entry_spot] do czasu zamknięcia kontraktu dnia [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] osiągnie tę samo wartość, co [entry_spot] przez [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time."
 msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] osiągnie tę samo wartość, co [entry_spot] przez [duration] po rozpoczęciu kontraktu."
