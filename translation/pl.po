@@ -8,37 +8,37 @@ msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is st
 msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] po [tick_count] najmniejszych przyrostach ceny jest wyższa niż [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] będzie wyższa niż [entry_spot] o [duration] po [date_start]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] będzie wyższa niż [entry_spot] w [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] będzie wyższa niż [entry_spot] po [duration] od czasu rozpoczęcia kontraktu."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli ostatnia cyfra wartości, jaką wykazuje [underlying] nie będzie równa [barrier] po [tick_count] najmniejszych przyrostach ceny."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli ostatnia cyfra wartości, jaką wykazuje [underlying] będzie cyfrą parzystą po [tick_count] najmniejszych przyrostach ceny."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli ostatnia cyfra wartości, jaką wykazuje [underlying] będzie równa [barrier] po [tick_count] najmniejszych przyrostach ceny."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli ostatnia cyfra wartości, jaką wykazuje [underlying] będzie cyfrą nieparzystą po [tick_count] najmniejszych przyrostach ceny."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli ostatnia cyfra wartości, jaką wykazuje [underlying] będzie większa niż [barrier] po [tick_count] najmniejszych przyrostach ceny."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli ostatnia cyfra wartości, jaką wykazuje [underlying] będzie mniejsza niż [barrier] po [tick_count] najmniejszych przyrostach ceny."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] wykroczy poza przedział od [low_barrier_str] do [high_barrier_str] w momencie zamknięcia kontraktu dnia [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] wykroczy poza przedział od [low_barrier_str] do [high_barrier_str] o [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
 msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] wykroczy poza przedział od [low_barrier_str] do [high_barrier_str] po [duration] od czasu rozpoczęcia kontraktu."
