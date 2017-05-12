@@ -82,6 +82,7 @@ msgstr ""
 "Hasil [currency] [amount] jika digit terakhir [underlying] lebih rendah "
 "[barrier] setelah [tick_count] tik."
 
+<<<<<<< HEAD
 msgid ""
 "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to "
 "[high_barrier_str] at close on [date_expiry]."
@@ -142,6 +143,42 @@ msgid ""
 "[currency] [amount] payout if [underlying] touches [entry_spot] through "
 "[duration] after contract start time."
 msgstr ""
+=======
+msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
+msgstr "Hasil [currency] [amount] jika [underlying] berakhir diluar [low_barrier_str] hingga [high_barrier_str] pada penutupan [date_expiry]."
+
+msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
+msgstr "Hasil [currency] [amount] jika [underlying] berakhir diluar [low_barrier_str] hingga [high_barrier_str] pada [date_expiry]."
+
+msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
+msgstr "Hasil [currency] [amount] jika [underlying] berakhir diluar [low_barrier_str] hingga [high_barrier_str] pada [duration] setelah waktu mulai kontrak."
+
+msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
+msgstr "Hasil [currency] [amount] jika [underlying] pasti berakhir antara [low_barrier_str] hingga [high_barrier_str] pada penutupan [date_expiry]."
+
+msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry]."
+msgstr "Hasil [currency] [amount] jika [underlying] pasti berakhir antara [low_barrier_str] hingga [high_barrier_str] pada [date_expiry]."
+
+msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
+msgstr "Hasil [currency] [amount] jika [underlying] berakhir antara [low_barrier_str] hingga [high_barrier_str] pada [duration] setelah waktu mulai kontrak."
+
+msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry]."
+msgstr "Hasil [currency] [amount] jika [underlying] tidak menyentuh [entry_spot] hingga penutupan [date_expiry]."
+
+msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry]."
+msgstr "Hasil [currency] [amount] jika [underlying] tidak menyentuh [entry_spot] hingga [date_expiry]."
+
+msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time."
+msgstr "Hasil [currency] [amount] jika [underlying] tidak menyentuh [entry_spot] hingga [duration] setelah waktu mulai kontrak."
+
+msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry]."
+msgstr "Hasil [currency] [amount] jika [underlying] menyentuh [entry_spot] hingga penutupan pada [date_expiry]."
+
+msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
+msgstr "Hasil [currency] [amount] jika [underlying] menyentuh [entry_spot] hingga [date_expiry]."
+
+msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time."
+msgstr "Hasil [currency] [amount] jika [underlying] menyentuh [entry_spot] hingga [duration] setelah waktu mulai kontak."
 
 msgid ""
 "[currency] [amount] payout if [underlying] after [tick_count] ticks is "
