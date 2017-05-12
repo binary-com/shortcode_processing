@@ -589,7 +589,7 @@ const get_bet_parameters = (shortcode, currency, active_symbols) => {
             if (match[5].toUpperCase().indexOf('F') !== -1) parameters.fixed_expiry = 1;
             parameters.date_expiry = +match[5].toUpperCase().replace('F', '')
         }
-        if (match[6] === 'S0P' || +match[6] === 0) { // No barrier
+        if (match[6] === 'S0P') { // No barrier
             parameters.barrier_count = 0;
         } else if (match[7] === 'S0P' || +match[7] === 0) { //Only one barrier available
             parameters.barrier_count = 1;
@@ -9369,51 +9369,51 @@ module.exports = {
 module.exports = {
 	"[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks.": [
 		null,
-		""
+		"Hasil [currency] [amount] jika tik terakhir [underlying] pasti lebih tinggi dari rata-rata [tick_count] tik."
 	],
 	"[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks.": [
 		null,
-		""
+		"Hasil [currency] [amount] jika tik terakhir [underlying] pasti lebih rendah dari rata-rata [tick_count] tik."
 	],
 	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot].": [
 		null,
-		""
+		"Hasil [currency] [amount] jika [underlying] setelah [tick_count] tik pasti lebih tinggi dari [entry_spot]."
 	],
 	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start].": [
 		null,
-		""
+		"Hasil [currency] [amount] jika [underlying] pasti lebih tinggi dari [entry_spot] selama [duration] setelah [date_start]."
 	],
 	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry].": [
 		null,
-		""
+		"Hasil [currency] [amount] jika [underlying] pasti lebih tinggi dari [entry_spot] pada [date_expiry]."
 	],
 	"[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time.": [
 		null,
-		""
+		"Hasil [currency] [amount] jika [underlying] pasti lebih tinggi dari [entry_spot] selama [duration] setelah waktu mulai kontrak."
 	],
 	"[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks.": [
 		null,
-		""
+		"Hasil [currency] [amount] jika digit terakhir [underlying] bukan [barrier] setelah [tick_count] tik."
 	],
 	"[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks.": [
 		null,
-		""
+		"Hasil [currency] [amount] jika digit terakhir [underlying] adalah genap setelah [tick_count] tik."
 	],
 	"[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks.": [
 		null,
-		""
+		"Hasil [currency] [amount] jika digit terakhir [underlying] adalah [barrier] setelah [tick_count] tik."
 	],
 	"[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks.": [
 		null,
-		""
+		"Hasil [currency] [amount] jika digit terakhir [underlying] adalah ganjil setelah [tick_count] tik."
 	],
 	"[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks.": [
 		null,
-		""
+		"Hasil [currency] [amount] jika digit terakhir [underlying] lebih tinggi dari [barrier] setelah [tick_count] tik."
 	],
 	"[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks.": [
 		null,
-		""
+		"Hasil [currency] [amount] jika digit terakhir [underlying] lebih rendah [barrier] setelah [tick_count] tik."
 	],
 	"[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry].": [
 		null,
@@ -9465,43 +9465,39 @@ module.exports = {
 	],
 	"[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot].": [
 		null,
-		""
+		"Hasil [currency] [amount] jika [underlying] setelah [tick_count] tik pasti lebih rendah dari [entry_spot]."
 	],
 	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start].": [
 		null,
-		""
+		"Hasil [currency] [amount] jika [underlying] pasti lebih rendah dari [entry_spot] selama [duration] setelah [date_start]."
 	],
 	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry].": [
 		null,
-		""
+		"Hasil [currency] [amount] jika [underlying] pasti lebih rendah dari [entry_spot] pada [date_expiry]."
 	],
 	"[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time.": [
 		null,
-		""
+		"Hasil [currency] [amount] jika [underlying] pasti lebih rendah dari [entry_spot] selama [duration] setelah waktu mulai kontrak."
 	],
 	"Legacy contract. No further information is available.": [
 		null,
-		""
+		"Kontrak legacy. Tidak tersedia informasi lebih lanjut."
 	],
 	"[n] day": [
 		"[n] days",
-		"",
-		""
+		"[n] hari"
 	],
 	"[n] hour": [
 		"[n] hours",
-		"",
-		""
+		"[n] jam"
 	],
 	"[n] minute": [
 		"[n] minutes",
-		"",
-		""
+		"[n] menit"
 	],
 	"[n] second": [
 		"[n] seconds",
-		"",
-		""
+		"[n] detik"
 	]
 };
 
@@ -9771,22 +9767,18 @@ module.exports = {
 	],
 	"[n] day": [
 		"[n] days",
-		"",
 		""
 	],
 	"[n] hour": [
 		"[n] hours",
-		"",
 		""
 	],
 	"[n] minute": [
 		"[n] minutes",
-		"",
 		""
 	],
 	"[n] second": [
 		"[n] seconds",
-		"",
 		""
 	]
 };
@@ -9915,20 +9907,24 @@ module.exports = {
 	"[n] day": [
 		"[n] days",
 		"",
+		"",
 		""
 	],
 	"[n] hour": [
 		"[n] hours",
+		"",
 		"",
 		""
 	],
 	"[n] minute": [
 		"[n] minutes",
 		"",
+		"",
 		""
 	],
 	"[n] second": [
 		"[n] seconds",
+		"",
 		"",
 		""
 	]
@@ -10201,20 +10197,24 @@ module.exports = {
 	"[n] day": [
 		"[n] days",
 		"",
+		"",
 		""
 	],
 	"[n] hour": [
 		"[n] hours",
+		"",
 		"",
 		""
 	],
 	"[n] minute": [
 		"[n] minutes",
 		"",
+		"",
 		""
 	],
 	"[n] second": [
 		"[n] seconds",
+		"",
 		"",
 		""
 	]
@@ -10376,22 +10376,18 @@ module.exports = {
 	],
 	"[n] day": [
 		"[n] days",
-		"",
 		""
 	],
 	"[n] hour": [
 		"[n] hours",
-		"",
 		""
 	],
 	"[n] minute": [
 		"[n] minutes",
-		"",
 		""
 	],
 	"[n] second": [
 		"[n] seconds",
-		"",
 		""
 	]
 };
@@ -10519,22 +10515,18 @@ module.exports = {
 	],
 	"[n] day": [
 		"[n] days",
-		"",
 		""
 	],
 	"[n] hour": [
 		"[n] hours",
-		"",
 		""
 	],
 	"[n] minute": [
 		"[n] minutes",
-		"",
 		""
 	],
 	"[n] second": [
 		"[n] seconds",
-		"",
 		""
 	]
 };
@@ -11263,6 +11255,25 @@ describe('get_bet_parameters', () => {
                 });
         });
 
+        it('DIGITMATCH type contract with Barrier as 0', () => {
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('DIGITMATCH_R_10_18.18_1492407891_5T_0_0', 'USD', active_symbols))
+                .to.deep.equal({
+                    barrier_count: 1,
+                    barrier: '0',
+                    barrier_absolute: 1,
+                    shortcode: 'DIGITMATCH_R_10_18.18_1492407891_5T_0_0',
+                    bet_type: 'DIGITMATCH',
+                    underlying: "Volatility 10 Index",
+                    underlying_symbol: 'R_10',
+                    amount_type: 'payout',
+                    amount: '18.18',
+                    date_start: 1492407891,
+                    tick_count: 5,
+                    tick_expiry: 1,
+                    currency: 'USD'
+                });
+        });
+
         it('DIGITOVER type contract', () => {
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('DIGITOVER_R_10_4.88_1492408153_5T_5_0', 'USD', active_symbols))
                 .to.deep.equal({
@@ -11304,7 +11315,9 @@ describe('get_bet_parameters', () => {
         it('DIGITODD type contract', () => {
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('DIGITODD_R_10_3.92_1492408262_5T_0_0', 'USD', active_symbols))
                 .to.deep.equal({
-                    barrier_count: 0,
+                    barrier_count: 1,
+                    barrier: '0',
+                    barrier_absolute: 1,
                     shortcode: 'DIGITODD_R_10_3.92_1492408262_5T_0_0',
                     bet_type: 'DIGITODD',
                     underlying: "Volatility 10 Index",
@@ -11321,7 +11334,9 @@ describe('get_bet_parameters', () => {
         it('DIGITEVEN type contract', () => {
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_chai__["expect"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__src_get_bet_parameters_js__["a" /* get_bet_parameters */])('DIGITEVEN_R_10_3.92_1492410208_5T_0_0', 'USD', active_symbols))
                 .to.deep.equal({
-                    barrier_count: 0,
+                    barrier_count: 1,
+                    barrier: '0',
+                    barrier_absolute: 1,
                     shortcode: 'DIGITEVEN_R_10_3.92_1492410208_5T_0_0',
                     bet_type: 'DIGITEVEN',
                     underlying: "Volatility 10 Index",
