@@ -60,7 +60,7 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
             if (match[5].toUpperCase().indexOf('F') !== -1) parameters.fixed_expiry = 1;
             parameters.date_expiry = +match[5].toUpperCase().replace('F', '')
         }
-        if (match[6] === 'S0P' || +match[6] === 0) { // No barrier
+        if (match[6] === 'S0P') { // No barrier
             parameters.barrier_count = 0;
         } else if (match[7] === 'S0P' || +match[7] === 0) { //Only one barrier available
             parameters.barrier_count = 1;

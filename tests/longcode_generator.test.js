@@ -115,6 +115,11 @@ describe('Longcode Generator', () => {
             expect(longcode.get(param)).to.equal('USD 18.18 payout if last digit of Volatility 10 Index is 4 after 5 ticks.');
         });
 
+        it('DIGITMATCH contracts with barrier as "0"', () => {
+            const param = get_bet_parameters('DIGITMATCH_R_10_18.18_1492407891_5T_0_0', 'USD', active_symbols);
+            expect(longcode.get(param)).to.equal('USD 18.18 payout if last digit of Volatility 10 Index is 0 after 5 ticks.');
+        });
+
         it('DIGITODD contracts', () => {
             const param = get_bet_parameters('DIGITODD_R_10_3.92_1492408262_5T_0_0', 'USD', active_symbols);
             expect(longcode.get(param)).to.equal('USD 3.92 payout if last digit of Volatility 10 Index is odd after 5 ticks.');

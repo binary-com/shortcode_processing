@@ -1,3 +1,5 @@
 node_modules
 error.js
 type-of-contracts
+dist
+tests/testBundle.js

@@ -11,18 +11,26 @@ updateTranslations.prototype.apply = function (compiler) {
     const options = this.options;
     compiler.plugin('done', (compilation, callback) => {
         var messages = path.resolve(options.directory, options.pot);
-        var command = options.languages.map((ln) => {
+        var commands = options.languages.map((ln) => {
             ln = path.resolve(options.directory, ln + '.po');
             return 'msgmerge --no-fuzzy-matching --output-file=' + ln + ' ' + ln + ' ' + messages;
-        }).join(' & ');
-        console.log("Updating translation files...");
-        exec(command, function (error, stdout, stderr) {
-            if (error) {
-                console.error(error);
-                return;
-            }
-            console.log(stdout);
         });
+        console.log("Updating translation files...");
+
+        function excute_command(commands, i) {
+            if (commands[i]) {
+                exec(commands[i], function (error, stdout, stderr) {
+                    if (error) {
+                        console.error(error);
+                        return;
+                    } else {
+                        console.log('...done');
+                        excute_command(commands, ++i);
+                    }
+                });
+            }
+        }
+        excute_command(commands, 0)
     });
 };
 

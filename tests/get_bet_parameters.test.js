@@ -188,6 +188,25 @@ describe('get_bet_parameters', () => {
                 });
         });
 
+        it('DIGITMATCH type contract with Barrier as 0', () => {
+            expect(get_bet_parameters('DIGITMATCH_R_10_18.18_1492407891_5T_0_0', 'USD', active_symbols))
+                .to.deep.equal({
+                    barrier_count: 1,
+                    barrier: '0',
+                    barrier_absolute: 1,
+                    shortcode: 'DIGITMATCH_R_10_18.18_1492407891_5T_0_0',
+                    bet_type: 'DIGITMATCH',
+                    underlying: "Volatility 10 Index",
+                    underlying_symbol: 'R_10',
+                    amount_type: 'payout',
+                    amount: '18.18',
+                    date_start: 1492407891,
+                    tick_count: 5,
+                    tick_expiry: 1,
+                    currency: 'USD'
+                });
+        });
+
         it('DIGITOVER type contract', () => {
             expect(get_bet_parameters('DIGITOVER_R_10_4.88_1492408153_5T_5_0', 'USD', active_symbols))
                 .to.deep.equal({
@@ -229,7 +248,9 @@ describe('get_bet_parameters', () => {
         it('DIGITODD type contract', () => {
             expect(get_bet_parameters('DIGITODD_R_10_3.92_1492408262_5T_0_0', 'USD', active_symbols))
                 .to.deep.equal({
-                    barrier_count: 0,
+                    barrier_count: 1,
+                    barrier: '0',
+                    barrier_absolute: 1,
                     shortcode: 'DIGITODD_R_10_3.92_1492408262_5T_0_0',
                     bet_type: 'DIGITODD',
                     underlying: "Volatility 10 Index",
@@ -246,7 +267,9 @@ describe('get_bet_parameters', () => {
         it('DIGITEVEN type contract', () => {
             expect(get_bet_parameters('DIGITEVEN_R_10_3.92_1492410208_5T_0_0', 'USD', active_symbols))
                 .to.deep.equal({
-                    barrier_count: 0,
+                    barrier_count: 1,
+                    barrier: '0',
+                    barrier_absolute: 1,
                     shortcode: 'DIGITEVEN_R_10_3.92_1492410208_5T_0_0',
                     bet_type: 'DIGITEVEN',
                     underlying: "Volatility 10 Index",
