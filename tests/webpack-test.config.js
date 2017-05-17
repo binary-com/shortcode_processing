@@ -4,7 +4,7 @@ var WebpackShellPlugin = require('webpack-shell-plugin');
 var config = {
     entry: './tests/all.js',
     output: {
-        filename: './tests/tests.js'
+        filename: './tests/testBundle.js'
     },
     externals: {
         chai: 'chai'

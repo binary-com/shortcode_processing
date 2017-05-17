@@ -1,34 +1,10 @@
 import { LongCode } from '../src/longcode_generator.js';
 import { get_bet_parameters } from '../src/get_bet_parameters.js';
 import { expect } from 'chai';
+import { constants } from './constants';
 
 describe('Longcode Generator', () => {
-    const active_symbols = [{
-        "allow_forward_starting": 1,
-        "display_name": "Bull Market Index",
-        "exchange_is_open": 1,
-        "is_trading_suspended": 0,
-        "market": "volidx",
-        "market_display_name": "Volatility Indices",
-        "pip": "0.0001",
-        "submarket": "random_daily",
-        "submarket_display_name": "Daily Reset Indices",
-        "symbol": "RDBULL",
-        "symbol_type": "stockindex"
-    },
-    {
-        "allow_forward_starting": 1,
-        "display_name": "Volatility 10 Index",
-        "exchange_is_open": 1,
-        "is_trading_suspended": 0,
-        "market": "volidx",
-        "market_display_name": "Volatility Indices",
-        "pip": "0.001",
-        "submarket": "random_index",
-        "submarket_display_name": "Continuous Indices",
-        "symbol": "R_10",
-        "symbol_type": "stockindex"
-    }];
+    const active_symbols = constants.active_symbols;
     const longcode = new LongCode('en')
 
     describe('ASIAN', () => {

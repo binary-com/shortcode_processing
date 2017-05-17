@@ -49,3 +49,9 @@ export const dateProcessor = (ts) => {
         }
     }
 };
+
+export const durationToEpoch = (date_start, duration) => {
+    const unit = duration.duration_unit.toLowerCase();
+    const unit_value = unit === 's' ? 1 : unit === 'm' ? 60 : unit === 'h' ? 60 * 60 : 60 * 60 * 24;
+    return ((+date_start) + (duration.duration * unit_value));
+}

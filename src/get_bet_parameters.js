@@ -19,18 +19,15 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
 
     if (!active_symbols)
         throw 'Active Symbols list not present';
-    
+
     // in case someone sends the raw response from websocket.
-    if(active_symbols.active_symbols)
+    if (active_symbols.active_symbols)
         active_symbols = active_symbols.active_symbols;
 
     // For proposal response
     if (typeof shortcode === 'object') {
         const proposal_response = shortcode;
-        if (!shortcode.proposal || !shortcode.echo_req) {
-            throw 'Unsupported proposal response. Please pass the complete response with "echo_req".'
-        }
-        return get_proposal_parameters(proposal_response);
+        return get_proposal_parameters(proposal_response, active_symbols);
     }
 
     //Contracts with barrier
@@ -83,28 +80,27 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
             parameters.barrier_count = 0;
         } else if (match[7] === 'S0P' || +match[7] === 0) { //Only one barrier available
             parameters.barrier_count = 1;
-            if (match[6].startsWith('S') && match[6].endsWith('P')) { //Relative barrier
-                match[6] = match[6].replace('S', '').replace('P', '')
+            if (/^S\-?\d+P$/.test(match[6])) { //Relative barrier
+                match[6] = match[6].replace(/[SP]/g, '');
                 parameters.barrier = (match[6] * underlying.pip).toFixed(digits_after_decimal);
             } else { //Absolute barrier
                 parameters.barrier_absolute = 1;
-                parameters.barrier = match[1].startsWith('DIGIT') ? match[6] : (match[6] / 1000000).toFixed(digits_after_decimal);
+                parameters.barrier = match[1].startsWith('DIGIT') ? match[6] : (+match[6] / 1000000).toFixed(digits_after_decimal);
             }
         } else { // Two barriers available
             parameters.barrier_count = 2;
-            if (match[6].startsWith('S') && match[6].endsWith('P')) { //Relative Barrier
-                match[6] = match[6].replace('S', '').replace('P', '');
-                match[7] = match[7].replace('S', '').replace('P', '')
+            if (/^S\-?\d+P$/.test(match[6])) { //Relative Barrier
+                match[6] = match[6].replace(/[SP]/g, '');
+                match[7] = match[7].replace(/[SP]/g, '');
                 parameters.high_barrier = (match[6] * underlying.pip).toFixed(digits_after_decimal);
                 parameters.low_barrier = (match[7] * underlying.pip).toFixed(digits_after_decimal);
             } else { //Absolute barrier
                 parameters.barrier_absolute = 1;
-                parameters.high_barrier = match[1].startsWith('DIGIT') ? +match[6] : (+match[6] / 1000000).toFixed(digits_after_decimal);
-                parameters.low_barrier = match[1].startsWith('DIGIT') ? +match[7] : (+match[7] / 1000000).toFixed(digits_after_decimal);
+                parameters.high_barrier = match[1].startsWith('DIGIT') ? match[6] : (+match[6] / 1000000).toFixed(digits_after_decimal);
+                parameters.low_barrier = match[1].startsWith('DIGIT') ? match[7] : (+match[7] / 1000000).toFixed(digits_after_decimal);
             }
         }
     }
-
 
     parameters.currency = currency;
 

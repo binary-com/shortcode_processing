@@ -1,2 +1,2 @@
 global.chai = require('chai');
-require('./tests.js');
+require('./testBundle.js');
