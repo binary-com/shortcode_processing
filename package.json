@@ -13,16 +13,20 @@
     "estree-utils": "^0.1.1",
     "gettext-loader2": "^0.2.3",
     "json-loader": "^0.5.4",
-    "mocha": "^3.2.0",
+    "mocha": "^3.4.1",
     "moment": "^2.18.1",
+    "nyc": "^10.3.2",
     "po-loader": "^0.3.1",
     "webpack": "^2.3.3",
     "webpack-shell-plugin": "^0.5.0"
   },
   "scripts": {
-    "test": "webpack --config tests/webpack-test.config.js",
-    "build": "webpack",
-    "build-prod": "webpack -p"
+    "test": "webpack --progress --config tests/webpack-test.config.js && nyc report",
+    "build": "webpack --progress",
+    "build-prod": "webpack --progress -p"
+  },
+  "nyc": {
+    "exclude": ["tests/mocha_test.js"]
   },
   "repository": {
     "type": "git",

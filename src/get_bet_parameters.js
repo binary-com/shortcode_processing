@@ -1,4 +1,5 @@
 import { find } from './utils';
+import { get_proposal_parameters } from './proposal_parameters';
 
 /**
  * Created by Apoorv Joshi on 17/04/2017
@@ -12,8 +13,26 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
         underlying: 'config',
         currency: currency
     };
+    // If shortcode is not provided or is not supported then throw error.
+    if (!shortcode || (typeof shortcode !== 'string' && typeof shortcode !== 'object'))
+        throw 'Shortcode not supported';
+
     if (!active_symbols)
         throw 'Active Symbols list not present';
+    
+    // in case someone sends the raw response from websocket.
+    if(active_symbols.active_symbols)
+        active_symbols = active_symbols.active_symbols;
+
+    // For proposal response
+    if (typeof shortcode === 'object') {
+        const proposal_response = shortcode;
+        if (!shortcode.proposal || !shortcode.echo_req) {
+            throw 'Unsupported proposal response. Please pass the complete response with "echo_req".'
+        }
+        return get_proposal_parameters(proposal_response);
+    }
+
     //Contracts with barrier
     let match = shortcode.match(/^([^_]+)_([\w\d^_]+)_(\d*\.?\d*)_(\d+F?)_(\d+[FT]?)_(S?-?\d+P?)_(S?-?\d+P?)$/);
     if (!match) { // Contracts without barriers. Eg: 'Asians'. (Not being racist, it is actually a contract type. Believe me!)
@@ -35,8 +54,8 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
                 tick_count: +match[5].toUpperCase().replace('T', '')
             }
         } else { //Legacy contract
-            if(/^SPREAD/.test(shortcode))
-            parameters.bet_type = 'SPREAD';
+            if (/^SPREAD/.test(shortcode))
+                parameters.bet_type = 'SPREAD';
         }
     } else { // Normal contracts with at least 1 barrier.
         const underlying = find(active_symbols, underlying => underlying.symbol.toUpperCase() === match[2].toUpperCase());

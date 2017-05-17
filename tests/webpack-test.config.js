@@ -4,11 +4,14 @@ var WebpackShellPlugin = require('webpack-shell-plugin');
 var config = {
     entry: './tests/all.js',
     output: {
-        filename: './tests/testBundle.js'
+        filename: './tests/tests.js'
+    },
+    externals: {
+        chai: 'chai'
     },
     plugins: [
         new WebpackShellPlugin({
-            onBuildExit: "mocha tests/testBundle.js"
+            onBuildExit: "nyc --reporter=lcov mocha tests/mocha_test.js"
         })
     ]
 };
