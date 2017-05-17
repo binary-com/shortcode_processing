@@ -56,51 +56,51 @@ msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] th
 msgstr "[currency] [amount] rendement si [underlying] ne touche pas [entry_spot] jusqu'à la clôture du [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] rendement si [underlying] ne touche pas [entry_spot] jusqu'au [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] rendement si [underlying] ne touche pas [entry_spot] pendant [duration] après le début du contrat."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] rendement si [underlying] touche [entry_spot] jusqu'à la clôture du [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] rendement si [underlying] touche [entry_spot] jusqu'au [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] rendement si [underlying] touche [entry_spot] pendant [duration] après le début du contrat."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot]."
-msgstr ""
+msgstr "[currency] [amount] rendement si [underlying] après [tick_count] ticks est strictement inférieur à [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "[currency] [amount] rendement si [underlying] est strictement inférieur à [entry_spot] à [duration] après [date_start]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] rendement si [underlying] est strictement inférieur à [entry_spot] à [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] rendement si [underlying] est strictement inférieur à [entry_spot] à [duration] après le début du contrat."
 
 msgid "Legacy contract. No further information is available."
-msgstr ""
+msgstr "Contrat de succession. Aucune autre information n'est disponible."
 
 msgid "[n] day"
 msgid_plural "[n] days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "[n] jour"
+msgstr[1] "[n] jours"
 
 msgid "[n] hour"
 msgid_plural "[n] hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "[n] heure"
+msgstr[1] "[n] heures"
 
 msgid "[n] minute"
 msgid_plural "[n] minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "[n] minute"
+msgstr[1] "[n] minutes"
 
 msgid "[n] second"
 msgid_plural "[n] seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "[n] seconde"
+msgstr[1] "[n] secondes"
