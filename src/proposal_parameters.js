@@ -23,9 +23,10 @@ export const get_proposal_parameters = (raw_response, active_symbols) => {
     const underlying = find(active_symbols, obj =>
         obj.symbol.toUpperCase() === parameters.underlying_symbol.toUpperCase()
     );
+    const digits_after_decimal = underlying.pip ? ('' + underlying.pip).split('.')[1].length : 2;
 
     parameters.underlying = underlying.display_name;
-    set_barriers(parameters, request);
+    set_barriers(parameters, request, digits_after_decimal);
     calculate_ts(parameters, raw_response);
 
     // is forward starting ?
@@ -36,13 +37,13 @@ export const get_proposal_parameters = (raw_response, active_symbols) => {
     return parameters;
 }
 
-function set_barriers(parameters, request) {
+function set_barriers(parameters, request, digits_after_decimal) {
     parameters.barrier_count = request.barrier ? request.barrier2 ? 2 : 1 : 0;
     if (parameters.barrier_count === 1)
-        parameters.barrier = request.barrier;
+        parameters.barrier = parameters.bet_type.startsWith('DIGIT') ? request.barrier : (+request.barrier).toFixed(digits_after_decimal);
     if (parameters.barrier_count === 2) {
-        parameters.high_barrier = request.barrier;
-        parameters.low_barrier = request.barrier2;
+        parameters.high_barrier = (+request.barrier).toFixed(digits_after_decimal);
+        parameters.low_barrier = (+request.barrier2).toFixed(digits_after_decimal);
     }
     if (request.barrier && /^\d+\.?\d+$/.test(request.barrier))
         parameters.barrier_absolute = 1;

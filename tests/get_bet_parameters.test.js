@@ -274,5 +274,12 @@ describe('get_bet_parameters', () => {
         }
         expect(get_bet_parameters("SPREADU_R_10_1_1490952253_1_1.55_POINT", 'USD', active_symbols).bet_type)
             .to.equal('SPREAD');
-    })
+    });
+
+    it('Returns barriers if vaules are set to 0', () => {
+        const param = get_bet_parameters("EXPIRYMISS_R_10_10_1495015030_1495015150_S0P_S-1769P", 'USD', active_symbols);
+        expect(param.barrier_count).to.equal(2);
+        expect(param.high_barrier).to.equal('0.000');
+        expect(param.low_barrier).to.equal('-1.769');
+    });
 });

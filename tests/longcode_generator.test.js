@@ -245,4 +245,23 @@ describe('Longcode Generator', () => {
         let param = get_bet_parameters('SPREADU_R_10_1_1490952253_1_1.55_POINT', 'USD', active_symbols);
         expect(longcode.get(param)).to.equal('Legacy contract. No further information is available.');
     });
+
+    it('returns longcode if barrier is set to 0', () => {
+        const param = get_bet_parameters("EXPIRYMISS_R_10_10_1495015030_1495015150_S0P_S-1769P", 'USD', active_symbols);
+        expect(longcode.get(param))
+            .to.equal('USD 10.00 payout if Volatility 10 Index ends outside entry spot minus 1.769 to entry spot at 2 minutes after contract start time.');
+    });
+
+    describe('Proposal response', () => {
+        it('Returns longcode for DIGITMATCH', () => {
+            let param = get_bet_parameters(constants.proposal.DIGITMATCH, 'USD', active_symbols);
+            expect(longcode.get(param)).to.equal('USD 10.00 payout if last digit of Volatility 10 Index is 0 after 5 ticks.');
+        });
+        it('Returns longcode for expiry miss', () => {
+            let param = get_bet_parameters(constants.proposal.ENDSIN, 'USD', active_symbols);
+            expect(longcode.get(param))
+                .to.equal('USD 10.00 payout if Volatility 10 Index ends outside entry ' +
+                'spot minus 1.763 to entry spot plus 10755.100 at 2 minutes after contract start time.');
+        })
+    })
 });

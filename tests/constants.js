@@ -122,6 +122,31 @@ export const constants = {
                 "longcode": "Win payout if Volatility 10 Index is strictly higher than entry spot at 6 hours 45 minutes after 2017-05-17 09:50:00 GMT.",
                 "payout": "10", "spot": "10770.548", "spot_time": "1495012262"
             }, "req_id": 554
+        },
+        'DIGITMATCH': {
+            "echo_req": {
+                "amount": 10, "barrier": "0", "basis": "payout", "contract_type": "DIGITMATCH",
+                "currency": "USD", "duration": 5, "duration_unit": "t", "proposal": 1, "req_id": 556, "subscribe": 1, "symbol": "R_10"
+            },
+            "msg_type": "proposal", "passthrough": null, "proposal": {
+                "ask_price": "1.10", "date_start": "1495013448",
+                "display_value": "1.10", "id": "eb28d50e-e6a3-b50e-a971-df7e06cf737f",
+                "longcode": "Win payout if the last digit of Volatility 10 Index is 0 after 5 ticks.",
+                "payout": "10", "spot": "10771.584", "spot_time": "1495013448"
+            }, "req_id": 556
+        },
+        'ENDSIN': {
+            "echo_req": {
+                "amount": 10, "barrier": "+10755.1", "barrier2": "-1.763", "basis": "payout",
+                "contract_type": "EXPIRYMISS", "currency": "USD", "duration": 2, "duration_unit": "m", "proposal": 1, "req_id": 558,
+                "subscribe": 1, "symbol": "R_10"
+            },
+            "msg_type": "proposal", "proposal": {
+                "ask_price": "2.16", "date_start": "1495013868",
+                "display_value": "2.16", "id": "0baeadea-2ee0-dc67-409a-70a4a3114a0b",
+                "longcode": "Win payout if Volatility 10 Index ends outside entry spot minus 1.763 to entry spot plus 10755.100 at 2 minutes after contract start time.",
+                "payout": "10", "spot": "10774.050", "spot_time": "1495013868"
+            }, "req_id": 558
         }
     },
     active_symbols: [{

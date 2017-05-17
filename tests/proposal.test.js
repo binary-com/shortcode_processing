@@ -43,7 +43,7 @@ describe('Using proposal response to generate bet parameters', () => {
     it('One Barrier', () => {
         const param = get_param(constants.proposal['One barrier'], active_symbols);
         expect(param.barrier_count).to.equal(1);
-        expect(param.barrier).to.equal('+0.36');
+        expect(param.barrier).to.equal('0.360');
         expect(param.high_barrier).to.equal(undefined);
         expect(param.low_barrier).to.equal(undefined);
         expect(param.barrier_absolute).to.equal(undefined);
@@ -60,7 +60,7 @@ describe('Using proposal response to generate bet parameters', () => {
         const param = get_param(constants.proposal['Two barrier'], active_symbols);
         expect(param.barrier_count).to.equal(2);
         expect(param.barrier).to.equal(undefined);
-        expect(param.high_barrier).to.equal('+1.25');
+        expect(param.high_barrier).to.equal('1.250');
         expect(param.low_barrier).to.equal('-1.763');
         expect(param.barrier_absolute).to.equal(undefined);
     });

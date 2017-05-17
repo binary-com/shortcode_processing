@@ -76,15 +76,19 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
             if (match[5].toUpperCase().indexOf('F') !== -1) parameters.fixed_expiry = 1;
             parameters.date_expiry = +match[5].toUpperCase().replace('F', '')
         }
-        if (match[6] === 'S0P') { // No barrier
+        if (match[6] === 'S0P' && +match[7] === 0) { // No barrier
             parameters.barrier_count = 0;
-        } else if (match[7] === 'S0P' || +match[7] === 0) { //Only one barrier available
+        } else if (+match[7] === 0) { //Only one barrier available
             parameters.barrier_count = 1;
             if (/^S\-?\d+P$/.test(match[6])) { //Relative barrier
                 match[6] = match[6].replace(/[SP]/g, '');
                 parameters.barrier = (match[6] * underlying.pip).toFixed(digits_after_decimal);
             } else { //Absolute barrier
                 parameters.barrier_absolute = 1;
+                /**
+                 * For future reference:
+                 * Short code contains absolute barrier of format -> actual_value * 10^6;
+                 */
                 parameters.barrier = match[1].startsWith('DIGIT') ? match[6] : (+match[6] / 1000000).toFixed(digits_after_decimal);
             }
         } else { // Two barriers available
@@ -96,8 +100,12 @@ export const get_bet_parameters = (shortcode, currency, active_symbols) => {
                 parameters.low_barrier = (match[7] * underlying.pip).toFixed(digits_after_decimal);
             } else { //Absolute barrier
                 parameters.barrier_absolute = 1;
-                parameters.high_barrier = match[1].startsWith('DIGIT') ? match[6] : (+match[6] / 1000000).toFixed(digits_after_decimal);
-                parameters.low_barrier = match[1].startsWith('DIGIT') ? match[7] : (+match[7] / 1000000).toFixed(digits_after_decimal);
+                /**
+                 * For future reference:
+                 * Short code contains absolute barrier of format -> actual_value * 10^6;
+                 */
+                parameters.high_barrier = (+match[6] / 1000000).toFixed(digits_after_decimal);
+                parameters.low_barrier = (+match[7] / 1000000).toFixed(digits_after_decimal);
             }
         }
     }
