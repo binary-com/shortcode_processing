@@ -24,7 +24,7 @@
     "test": "webpack --progress --config tests/webpack-test.config.js && nyc report",
     "build": "webpack --progress",
     "build-prod": "webpack --progress -p",
-    "release": "webpack --progress -p && npm version patch && npm publish"
+    "release": "webpack --progress -p && npm version patch"
   },
   "nyc": {
     "exclude": [
