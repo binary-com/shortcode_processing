@@ -7,7 +7,12 @@ export class Longcode {
       throw 'Param 1 containing active_symbols is missing.';
     this.active_symbols = args[0];
     this.lang = this.isLangSupported(args[1]) ? args[1] : 'en'; // EN is fallback language.
-    this.currency = args[2] ? args[2] : this.isLangSupported(args[1]) ? 'USD' : args[1] ? args[1] : 'USD';
+    // Default currency is USD
+    this.currency = args[2] ? args[2] : this.isLangSupported(args[1]) ?
+      (() => { 
+        console.warn('Currency not set, using fallback value "USD".');
+        return 'USD';
+      })() : args[1] ? args[1] : 'USD';
     this.longcode_gen = new LongCode(this.lang);
   }
 

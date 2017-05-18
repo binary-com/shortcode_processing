@@ -1,33 +1,9 @@
 import { get_bet_parameters } from '../src/get_bet_parameters.js';
 import { expect } from 'chai';
+import { constants } from './constants';
 
 describe('get_bet_parameters', () => {
-    const active_symbols = [{
-        "allow_forward_starting": 1,
-        "display_name": "Bull Market Index",
-        "exchange_is_open": 1,
-        "is_trading_suspended": 0,
-        "market": "volidx",
-        "market_display_name": "Volatility Indices",
-        "pip": "0.0001",
-        "submarket": "random_daily",
-        "submarket_display_name": "Daily Reset Indices",
-        "symbol": "RDBULL",
-        "symbol_type": "stockindex"
-    },
-    {
-        "allow_forward_starting": 1,
-        "display_name": "Volatility 10 Index",
-        "exchange_is_open": 1,
-        "is_trading_suspended": 0,
-        "market": "volidx",
-        "market_display_name": "Volatility Indices",
-        "pip": "0.001",
-        "submarket": "random_index",
-        "submarket_display_name": "Continuous Indices",
-        "symbol": "R_10",
-        "symbol_type": "stockindex"
-    }];
+    const active_symbols = constants.active_symbols;
 
     it('Throws error if active_symbols is undefined', () => {
         expect(() => get_bet_parameters('invalid_invalid', 'USD', undefined))
@@ -287,5 +263,23 @@ describe('get_bet_parameters', () => {
     it('Returns bet_type as SPREAD for legacy contracts', () => {
         expect(get_bet_parameters("SPREADU_R_10_1_1490952253_1_1.55_POINT", 'USD', active_symbols).bet_type)
             .to.equal('SPREAD');
-    })
+    });
+
+    it('Doesn\'t throw error on passing raw response for active_symbols from backend', () => {
+        const response = {
+            echo_req: { active_symbols: "brief", req_id: 2 },
+            msg_type: 'active_symbols',
+            req_id: 2,
+            active_symbols: active_symbols
+        }
+        expect(get_bet_parameters("SPREADU_R_10_1_1490952253_1_1.55_POINT", 'USD', active_symbols).bet_type)
+            .to.equal('SPREAD');
+    });
+
+    it('Returns barriers if vaules are set to 0', () => {
+        const param = get_bet_parameters("EXPIRYMISS_R_10_10_1495015030_1495015150_S0P_S-1769P", 'USD', active_symbols);
+        expect(param.barrier_count).to.equal(2);
+        expect(param.high_barrier).to.equal('0.000');
+        expect(param.low_barrier).to.equal('-1.769');
+    });
 });

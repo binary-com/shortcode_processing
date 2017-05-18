@@ -6,9 +6,12 @@ var config = {
     output: {
         filename: './tests/testBundle.js'
     },
+    externals: {
+        chai: 'chai'
+    },
     plugins: [
         new WebpackShellPlugin({
-            onBuildExit: "mocha tests/testBundle.js"
+            onBuildExit: "nyc --reporter=lcov mocha tests/mocha_test.js"
         })
     ]
 };
