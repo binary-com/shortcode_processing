@@ -27,4 +27,12 @@ var longcodeGenerator = new Longcode(active_symbols, language, currency);
 console.log(longcodeGenerator.get('some_short_code'));
 ```
 
+Use with proposal object:
+----
+To use it with proposal object please pass the raw response from the api to the function, eg:
+```
+var longcode = require('binary-com-longcode').Longcode;
+var longcodeGenerator = new Longcode(active_symbols, language, currency);
+console.log(longcodeGenerator.get(proposal_response));
+```
 > Note: For successful release update the `version` in **package.json**
