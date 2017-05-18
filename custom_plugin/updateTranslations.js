@@ -1,4 +1,3 @@
-'use strict';
 var exec = require('child_process').exec;
 var path = require('path');
 var fs = require('fs');
@@ -13,7 +12,7 @@ updateTranslations.prototype.apply = function (compiler) {
         var messages = path.resolve(options.directory, options.pot);
         var commands = options.languages.map((ln) => {
             ln = path.resolve(options.directory, ln + '.po');
-            return 'msgmerge --no-fuzzy-matching --output-file=' + ln + ' ' + ln + ' ' + messages;
+            return 'msgmerge -w 1000 --no-fuzzy-matching --output-file=' + ln + ' ' + ln + ' ' + messages;
         });
         console.log("Updating translation files...");
 
@@ -24,7 +23,7 @@ updateTranslations.prototype.apply = function (compiler) {
                         console.error(error);
                         return;
                     } else {
-                        console.log('...done');
+                        console.log('\033[0;32m...done\033[0m');
                         excute_command(commands, ++i);
                     }
                 });
