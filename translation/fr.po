@@ -23,7 +23,7 @@ msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier]
 msgstr "[currency] [amount] rendement si le dernier chiffre de [underlying] n'est pas [barrier] après [tick_count] ticks."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
-msgstr "[currency] [amount] rendement si le dernier chiffre de [underlying] est même après [tick_count] ticks."
+msgstr "[currency] [amount] rendement si le dernier chiffre de [underlying] est égal après [tick_count] ticks."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks."
 msgstr "[currency] [amount] rendement si le dernier chiffre de [underlying] est [barrier] après [tick_count] ticks."
@@ -35,7 +35,7 @@ msgid "[currency] [amount] payout if last digit of [underlying] is higher than [
 msgstr "[currency] [amount] paiement si le dernier chiffre de [underlying] est plus élevé que [barrier] après [tick_count] ticks."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks."
-msgstr "[currency] [amount] paiement si le dernier chiffre de [underlying] est plus élevé que [barrier] après [tick_count] ticks."
+msgstr "[currency] [amount] rendement si le dernier chiffre de [underlying] est plus bas que [barrier] après [tick_count] ticks."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
 msgstr "[currency] [amount] paiement si [underlying] finit en dehors de [low_barrier_str] à [high_barrier_str] à la clôture du [date_expiry]."
