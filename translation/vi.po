@@ -83,7 +83,7 @@ msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_
 msgstr ""
 
 msgid "Legacy contract. No further information is available."
-msgstr ""
+msgstr "Hợp đồng cũ. Không có sẵn có thông tin thêm."
 
 msgid "[n] day"
 msgid_plural "[n] days"
