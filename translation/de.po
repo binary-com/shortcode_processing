@@ -87,12 +87,14 @@ msgstr "Erbschaftsvertrag. Es stehen keine weiteren Informationen zur Verfügung
 
 msgid "[n] day"
 msgid_plural "[n] days"
-msgstr[0] "[n] Tag"
+msgstr[0] "Form: One [n] Tag\n"
+"Form: Other [n] Tage"
 msgstr[1] "[n] Tage"
 
 msgid "[n] hour"
 msgid_plural "[n] hours"
-msgstr[0] "[n] Stunde"
+msgstr[0] "Form: One [n] Stunde\n"
+"Form: Other [n] Stunden"
 msgstr[1] "[n] Stunden"
 
 msgid "[n] minute"
