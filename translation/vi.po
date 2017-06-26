@@ -74,13 +74,13 @@ msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is st
 msgstr "[currency] [amount] thanh toán nếu [underlying] sau khi [tick_count] dấu là thấp hơn [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] là thấp hơn [entry_spot] tại [duration] sau khi [date_start]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] là thấp hơn [entry_spot] tại [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] làthấp hơn [entry_spot] tại [duration] sau thời điểm bắt đầu hợp đồng."
 
 msgid "Legacy contract. No further information is available."
 msgstr "Hợp đồng cũ. Không có sẵn có thông tin thêm."
