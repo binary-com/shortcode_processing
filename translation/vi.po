@@ -1,41 +1,41 @@
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu các giao động cuối của [underlying] cao hơn mức trung bình của các khoảng giao động [tick_count]."
 
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu các giao động cuối của [underlying] thấp hơn mức trung bình của các khoảng giao động [tick_count]."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] sau khi [tick_count] giao động là cao hơn [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] là cao hơn [entry_spot] tại [duration] sau khi [date_start]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] là cao hơn [entry_spot] tại [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] là cao hơn [entry_spot] tại [duration] sau thời điểm bắt đầu hợp đồng."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu các chữ số cuối của [underlying] không phải là [barrier] sau khi [tick_count] đánh dấu."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu các chữ số cuối của [underlying] giữ nguyên sau khi [tick_count] đánh dấu."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu các chữ số cuối của [underlying] là [barrier] sau khi [tick_count] đánh dấu."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu các chữ số cuối của [underlying] là số lẻ sau khi [tick_count] đánh dấu."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu các chữ số cuối của [underlying] là cao hơn [barrier] sau khi [tick_count] đánh dấu."
 
 msgid "[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu các chữ số cuối của [underlying] thấp hơn [barrier] sau khi [tick_count] đánh dấu."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] kết thúc bên ngoài [low_barrier_str] đến [high_barrier_str] lúc đóng tại [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
 msgstr ""
