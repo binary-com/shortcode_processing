@@ -38,40 +38,40 @@ msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str]
 msgstr "[currency] [amount] thanh toán nếu [underlying] kết thúc bên ngoài [low_barrier_str] đến [high_barrier_str] lúc đóng tại [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] kết thúc bên ngoài [low_barrier_str] đến [high_barrier_str] tại [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] kết thúc bên ngoài [low_barrier_str] đến [high_barrier_str] tại [duration] sau khi thời điểm bắt đầu hợp đồng."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] kết thúc chỉ giữa [low_barrier_str] đến [high_barrier_str] lúc đóng tại [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] kết thúc chỉ trong khoảng [low_barrier_str] đến [high_barrier_str] tại [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu kết thúc [underlying] kết thúc chặt chẽ trong khoảng [low_barrier_str] đến [high_barrier_str] tại [duration] sau thời điểm hợp đồng bắt đầu."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] không chạm vào [entry_spot] thông qua đóng tại [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] không chạm vào [entry_spot] thông qua [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] không chạm vào [entry_spot] qua [duration] sau thời điểm bắt đầu hợp đồng."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] chạm vào [entry_spot] thông qua đóng tại [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] chạm vào [entry_spot] thông qua [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] chạm [entry_spot] qua [duration] sau thời điểm bắt đầu hợp đồng."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot]."
-msgstr ""
+msgstr "[currency] [amount] thanh toán nếu [underlying] sau khi [tick_count] dấu là thấp hơn [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start]."
 msgstr ""
