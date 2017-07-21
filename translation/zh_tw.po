@@ -44,7 +44,7 @@ msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str]
 msgstr "合約開始後[duration] 時如果[underlying] 平倉價在[low_barrier_str] 和[high_barrier_str] 範圍外，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr "[date_expiry] 収市時如果[underlying] 嚴格収於[low_barrier_str] 和[high_barrier_str] 範圍內，可獲得 [currency] [amount] 賠付額。"
+msgstr "[date_expiry] 収市時如果[underlying] 平倉價在[low_barrier_str] 和[high_barrier_str] 範圍內，可獲得 [currency] [amount] 賠付額。"
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry]."
 msgstr "[date_expiry] 時如果[underlying] 嚴格収於[low_barrier_str] 和[high_barrier_str] 範圍內，可獲得 [currency] [amount] 賠付額。"
