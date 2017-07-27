@@ -1,8 +1,8 @@
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "Pago de [currency] [amount] si el último intervalo en [underlying] es mayor que el promedio de [tick_count] intervalos."
 
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks."
-msgstr ""
+msgstr "Pago de [currency] [amount] si el último intervalo en [underlying] es menor que el promedio de [tick_count] intervalos."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot]."
 msgstr ""
