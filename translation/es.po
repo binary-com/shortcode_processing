@@ -41,49 +41,49 @@ msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str]
 msgstr "Pago de [currency] [amount] si [underlying] finaliza fuera del valor entre [low_barrier_str] y [high_barrier_str] en [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] finaliza fuera del valor entre [low_barrier_str] y [high_barrier_str] después de [duration] desde el inicio del contrato."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] finaliza estrictamente entre [low_barrier_str] y [high_barrier_str] al cierre en [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] finaliza estrictamente entre [low_barrier_str] y [high_barrier_str] en [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] finaliza estrictamente entre [low_barrier_str] y [high_barrier_str] después de [duration] desde el inicio del contrato."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] no toca [entry_spot] hasta el cierre de [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] no toca [entry_spot] hasta [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] no toca [entry_spot] hasta [duration] luego del inicio del contrato."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] toca [entry_spot] hasta el cierre de [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] toca [entry_spot] hasta [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] toca [entry_spot] hasta [duration] luego del inicio del contrato."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot]."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] luego de [tick_count] intervalos es estrictamente inferior al valor de [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start]."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] es estrictamente inferior al valor de [entry_spot] después de [duration] desde [date_start]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] es estrictamente inferior al valor de [entry_spot] en [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "Pago de [currency] [amount] si [underlying] es estrictamente inferior al valor de [entry_spot] después de [duration] desde el inicio del contrato."
 
 msgid "Legacy contract. No further information is available."
-msgstr ""
+msgstr "Contrato pre-existente. No hay información adicional disponible."
 
 msgid "[n] day"
 msgid_plural "[n] days"
