@@ -1,11 +1,11 @@
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks."
-msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli ostatni najmniejszy przyrost ceny, jaki wykazuje [underlying] jest wyższy niż średnia z [tick_count] najmniejszych przyrostów ceny."
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli ostatni najmniejszy przyrost ceny, jaki wykazuje [underlying] będzie wyższy niż średnia z [tick_count] najmniejszych przyrostów ceny."
 
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly lower than the average of the [tick_count] ticks."
 msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli ostatni najmniejszy przyrost ceny, jaki wykazuje [underlying] będzie niższy niż średnia z [tick_count] najmniejszych przyrostów ceny."
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly higher than [entry_spot]."
-msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] po [tick_count] najmniejszych przyrostach ceny jest wyższa niż [entry_spot]."
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] po [tick_count] najmniejszych przyrostach ceny będzie wyższa niż [entry_spot]."
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after [date_start]."
 msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] będzie wyższa niż [entry_spot] po [duration] od [date_start]."
