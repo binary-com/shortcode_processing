@@ -65,7 +65,7 @@ msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through c
 msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] osiągnie tę samo wartość, co [entry_spot] do czasu zamknięcia kontraktu dnia [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
-msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] osiągnie tę samo wartość, co [entry_spot] przez [date_expiry]."
+msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] osiągnie tę samą wartość, co [entry_spot] w ciągu dnia [date_expiry]."
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time."
 msgstr "Wypłata w wysokości [amount] [currency] nastąpi, jeżeli wartość, jaką wskazuje [underlying] osiągnie tę samo wartość, co [entry_spot] przez [duration] od rozpoczęciu kontraktu."
