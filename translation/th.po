@@ -87,11 +87,11 @@ msgstr ""
 
 msgid "[n] day"
 msgid_plural "[n] days"
-msgstr[0] ""
+msgstr[0] "[n] วัน"
 
 msgid "[n] hour"
 msgid_plural "[n] hours"
-msgstr[0] ""
+msgstr[0] "[n] ชั่วโมง"
 
 msgid "[n] minute"
 msgid_plural "[n] minutes"
@@ -100,3 +100,4 @@ msgstr[0] ""
 msgid "[n] second"
 msgid_plural "[n] seconds"
 msgstr[0] ""
+
