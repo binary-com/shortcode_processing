@@ -83,21 +83,21 @@ msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_
 msgstr ""
 
 msgid "Legacy contract. No further information is available."
-msgstr ""
+msgstr "สัญญาเก่า ไม่มีข้อมูล"
 
 msgid "[n] day"
 msgid_plural "[n] days"
-msgstr[0] "[n] วัน"
+msgstr[0] "วัน [n]"
 
 msgid "[n] hour"
 msgid_plural "[n] hours"
-msgstr[0] "[n] ชั่วโมง"
+msgstr[0] "ชั่วโมง [n]"
 
 msgid "[n] minute"
 msgid_plural "[n] minutes"
-msgstr[0] ""
+msgstr[0] "[n] นาที"
 
 msgid "[n] second"
 msgid_plural "[n] seconds"
-msgstr[0] ""
+msgstr[0] "[n] วินาที"
 
