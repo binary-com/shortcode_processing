@@ -80,7 +80,7 @@ msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_
 msgstr ""
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "[currency] [amount] ชำระเงิน ถ้า [underlying] ต่ำกว่า [entry_spot] เมื่อ [duration] หลังจากเวลาเริ่มต้นของสัญญา"
 
 msgid "Legacy contract. No further information is available."
 msgstr "สัญญาเก่า ไม่มีข้อมูล"
