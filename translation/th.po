@@ -32,16 +32,16 @@ msgid "[currency] [amount] payout if last digit of [underlying] is higher than [
 msgstr "ได้รับเงิน [currency] [amount] ถ้าตัวเลขสุดท้ายของ [underlying] มีค่าสูงกว่า [barrier] หลังจาก [tick_count] ช่วงราคา"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "ได้รับเงิน [currency] [amount] ถ้าตัวเลขสุดท้ายของ [underlying] มีค่าต่ำกว่า [barrier] หลังจาก [tick_count] ช่วงราคา"
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
-msgstr ""
+msgstr "ได้รับเงิน [currency] [amount] หาก [underlying] สิ้นสุดภายนอก [low_barrier_str] ถึง [high_barrier_str] และปิดเมื่อ [date_expiry]"
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [date_expiry]."
-msgstr ""
+msgstr "ได้รับเงิน [currency] [amount] หาก [underlying] สิ้นสุดภายนอก [low_barrier_str] ถึง [high_barrier_str] เมื่อ [date_expiry]"
 
 msgid "[currency] [amount] payout if [underlying] ends outside [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "ได้รับเงิน [currency] [amount] หาก [underlying] สิ้นสุดภายนอก [low_barrier_str] ถึง [high_barrier_str] เป็นเวลา [duration] หลังจากเวลาเริ่มต้นของสัญญา"
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at close on [date_expiry]."
 msgstr ""
