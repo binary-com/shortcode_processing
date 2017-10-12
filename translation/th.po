@@ -20,16 +20,16 @@ msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier]
 msgstr "ได้รับเงิน [currency] [amount] ถ้าตัวเลขสุดท้ายของ [underlying] ไม่เป็น [barrier] หลังจาก [tick_count] ช่วงราคา"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
-msgstr ""
+msgstr "ได้รับเงิน [currency] [amount] ถ้าตัวเลขสุดท้ายของ [underlying] เป็นเลขคู่ หลังจาก [tick_count] ช่วงราคา"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "ได้รับเงิน [currency] [amount] ถ้าตัวเลขสุดท้ายของ [underlying] เป็น [barrier] หลังจาก [tick_count] ช่วงราคา"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is odd after [tick_count] ticks."
-msgstr ""
+msgstr "ได้รับเงิน [currency] [amount] ถ้าตัวเลขสุดท้ายของ [underlying] เป็นเลขคี่ หลังจาก [tick_count] ช่วงราคา"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is higher than [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "ได้รับเงิน [currency] [amount] ถ้าตัวเลขสุดท้ายของ [underlying] มีค่าสูงกว่า [barrier] หลังจาก [tick_count] ช่วงราคา"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is lower than [barrier] after [tick_count] ticks."
 msgstr ""
