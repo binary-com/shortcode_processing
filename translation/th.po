@@ -11,13 +11,13 @@ msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry
 msgstr ""
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [date_expiry]."
-msgstr ""
+msgstr "ได้รับเงิน [currency] [amount] ถ้า [underlying] มีค่าสูงกว่า [entry_spot] ณ [date_expiry]"
 
 msgid "[currency] [amount] payout if [underlying] is strictly higher than [entry_spot] at [duration] after contract start time."
-msgstr ""
+msgstr "ได้รับเงิน [currency] [amount] ถ้า [underlying] มีค่าสูงกว่า [entry_spot] เป็นเวลา [duration] หลังจากเวลาเริ่มต้นของสัญญา"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is not [barrier] after [tick_count] ticks."
-msgstr ""
+msgstr "ได้รับเงิน [currency] [amount] ถ้าตัวเลขสุดท้ายของ [underlying] ไม่เป็น [barrier] หลังจาก [tick_count] ช่วงราคา"
 
 msgid "[currency] [amount] payout if last digit of [underlying] is even after [tick_count] ticks."
 msgstr ""
@@ -80,7 +80,7 @@ msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_
 msgstr ""
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after contract start time."
-msgstr "[currency] [amount] ชำระเงิน ถ้า [underlying] ต่ำกว่า [entry_spot] เมื่อ [duration] หลังจากเวลาเริ่มต้นของสัญญา"
+msgstr "ได้รับเงิน [currency] [amount] ถ้า [underlying] ต่ำกว่า [entry_spot] เมื่อ [duration] หลังจากเวลาเริ่มต้นของสัญญา"
 
 msgid "Legacy contract. No further information is available."
 msgstr "สัญญาเก่า ไม่มีข้อมูล"
