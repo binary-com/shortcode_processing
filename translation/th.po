@@ -50,28 +50,28 @@ msgid "[currency] [amount] payout if [underlying] ends strictly between [low_bar
 msgstr "ชำระเงิน [currency] [amount] หาก [underlying] สิ้นสุดระหว่าง [low_barrier_str] ถึง [high_barrier_str] ณ [date_expiry]"
 
 msgid "[currency] [amount] payout if [underlying] ends strictly between [low_barrier_str] to [high_barrier_str] at [duration] after contract start time."
-msgstr ""
+msgstr "ชำระเงิน [currency] [amount] หาก [underlying] สิ้นสุดระหว่าง [low_barrier_str] ถึง [high_barrier_str] เป็นเวลา [duration] หลังจากเวลาเริ่มต้นของสัญญา"
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "ชำระเงิน [currency] [amount] หาก [underlying] ไม่สัมผัส [entry_spot] แล้วปิดเมื่อ [date_expiry]"
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "ชำระเงิน [currency] [amount] หาก [underlying] ไม่สัมผัส [entry_spot] กระทั่ง [date_expiry]"
 
 msgid "[currency] [amount] payout if [underlying] does not touch [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "ชำระเงิน [currency] [amount] หาก [underlying] ไม่สัมผัส [entry_spot] กระทั่ง [duration] หลังจากเวลาเริ่มต้นของสัญญา"
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through close on [date_expiry]."
-msgstr ""
+msgstr "ชำระเงิน [currency] [amount] หาก [underlying] สัมผัส [entry_spot] แล้วปิดเมื่อ [date_expiry]"
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [date_expiry]."
-msgstr ""
+msgstr "ชำระเงิน [currency] [amount] หาก [underlying] สัมผัส [entry_spot] จนกระทั่ง [date_expiry]"
 
 msgid "[currency] [amount] payout if [underlying] touches [entry_spot] through [duration] after contract start time."
-msgstr ""
+msgstr "ชำระเงิน [currency] [amount] หาก [underlying] สัมผัส [entry_spot] จนกระทั่ง [duration] หลังจากเวลาเริ่มต้นของสัญญา"
 
 msgid "[currency] [amount] payout if [underlying] after [tick_count] ticks is strictly lower than [entry_spot]."
-msgstr ""
+msgstr "ชำระเงิน [currency] [amount] หาก [underlying] ภายหลัง [tick_count] ช่วงราคา ซึ่งมีค่าต่ำกว่า [entry_spot]"
 
 msgid "[currency] [amount] payout if [underlying] is strictly lower than [entry_spot] at [duration] after [date_start]."
 msgstr "ได้รับเงิน [currency] [amount] หาก [underlying] มีค่าต่ำกว่า [entry_spot] เป็นเวลา [duration] ภายหลัง [date_start]"
