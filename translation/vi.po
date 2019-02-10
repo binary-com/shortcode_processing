@@ -1,3 +1,17 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: crowdin.com\n"
+"X-Crowdin-Project: shortcodeprocessing\n"
+"X-Crowdin-Language: vi\n"
+"X-Crowdin-File: /master/translation/messages.pot\n"
+"Project-Id-Version: shortcodeprocessing\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Last-Translator: binarycom <jy@binary.com>\n"
+"Language-Team: Vietnamese\n"
+"Language: vi_VN\n"
+"PO-Revision-Date: 2019-02-10 17:21\n"
+
 msgid "[currency] [amount] payout if the last tick of [underlying] is strictly higher than the average of the [tick_count] ticks."
 msgstr "[currency] [amount] thanh toán nếu các giao động cuối của [underlying] cao hơn mức trung bình của các khoảng giao động [tick_count]."
 
